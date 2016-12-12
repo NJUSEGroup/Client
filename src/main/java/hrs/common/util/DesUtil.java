@@ -44,7 +44,7 @@ public class DesUtil implements Serializable{
 	static{
 		BufferedReader br = null;
 		try {
-			br =  new BufferedReader(new InputStreamReader(new FileInputStream("../HotelReservationSystem-server/src/main/resources/key.txt")));
+			br =  new BufferedReader(new InputStreamReader(DesUtil.class.getClassLoader().getResourceAsStream("key.txt")));
 			key = br.readLine();
 			br.close();
 		} catch (IOException e) {
