@@ -49,7 +49,7 @@ public class SpecialPeriodDialog extends JDialog {
 		webDiscountVO = webDiscountPanel.getSelected();
 
 		this.setTitle("特定期间专属折扣修改");
-		this.setBounds(100, 100, 420, 310);
+		this.setBounds(100, 100, 420, 300);
 		this.setModal(true);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -61,42 +61,52 @@ public class SpecialPeriodDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 
 		jlBeginTime = new JLabel("开始时间");
-		jlBeginTime.setBounds(56, 37, 61, 16);
+		jlBeginTime.setFont(UIConstants.FONT_17);
+		jlBeginTime.setBounds(56, 37, 74, 16);
 		contentPanel.add(jlBeginTime);
 
 		jlEndTime = new JLabel("结束时间");
-		jlEndTime.setBounds(56, 93, 61, 16);
+		jlEndTime.setFont(UIConstants.FONT_16);
+		jlEndTime.setBounds(56, 93, 74, 16);
 		contentPanel.add(jlEndTime);
 
 		jlDiscount = new JLabel("折扣信息");
-		jlDiscount.setBounds(56, 154, 61, 16);
+		jlDiscount.setFont(UIConstants.FONT_16);
+		jlDiscount.setBounds(56, 154, 74, 16);
 		contentPanel.add(jlDiscount);
 
 		jtextBeginTime = new DateChoosePanel();
+		jtextBeginTime.dayBox.setBounds(180, 0, 50, 25);
+		jtextBeginTime.monthBox.setBounds(100, 0, 50, 25);
+		jtextBeginTime.yearBox.setBounds(0, 0, 70, 25);
 		jtextBeginTime.setBounds(144, 34, 249, 26);
 		contentPanel.add(jtextBeginTime);
 		jtextBeginTime.setDate(webDiscountVO.beginTime);
 
 		jtextEndTime = new DateChoosePanel();
+		jtextEndTime.dayBox.setBounds(180, 0, 50, 25);
+		jtextEndTime.monthBox.setBounds(100, 0, 50, 25);
+		jtextEndTime.yearBox.setBounds(0, 0, 70, 25);
 		jtextEndTime.setBounds(144, 90, 249, 26);
 		contentPanel.add(jtextEndTime);
 		jtextEndTime.setDate(webDiscountVO.endTime);
 
 		jtextDiscount = new JTextField();
+		jtextDiscount.setFont(UIConstants.FONT_17);
 		jtextDiscount.setBounds(144, 149, 249, 26);
 		contentPanel.add(jtextDiscount);
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText(webDiscountVO.discount + "");
 
 		jbConfirmModify = new HMSBlueButton("确认修改");
-		jbConfirmModify.setFont(UIConstants.FONT_12);
-		jbConfirmModify.setBounds(87, 204, 103, 29);
+		jbConfirmModify.setFont(UIConstants.FONT_16);
+		jbConfirmModify.setBounds(83, 204, 103, 29);
 		listener = new ConfirmModifySpecialPeriodListener(webDiscountPanel, this);
 		jbConfirmModify.addMouseListener(listener);
 		contentPanel.add(jbConfirmModify);
 
 		jbCancalModify = new HMSBlueButton("取消修改");
-		jbCancalModify.setFont(UIConstants.FONT_12);
+		jbCancalModify.setFont(UIConstants.FONT_16);
 		jbCancalModify.setBounds(235, 204, 103, 29);
 		contentPanel.add(jbCancalModify);
 		cancelListener = new CancelModifySpecialPeriodDiscountListener(this);

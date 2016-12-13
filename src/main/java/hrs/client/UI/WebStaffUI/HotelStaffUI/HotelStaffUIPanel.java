@@ -59,11 +59,13 @@ public class HotelStaffUIPanel extends JPanel {
 		jlSearchHotelStaff.setFont(UIConstants.JLABEL_FONT);
 
 		jcomboBoxType = new JComboBox<Object>();
-		jcomboBoxType.setBounds(241, 43, 173, 40);
+		jcomboBoxType.setBounds(241, 49, 173, 26);
+		jcomboBoxType.setFont(UIConstants.FONT_17);
 		jcomboBoxType.setModel(new DefaultComboBoxModel<Object>(new String[] { "酒店名称", "酒店工作人员用户名" }));
 		jcomboBoxType.setSelectedIndex(-1);
 
 		jtextInput = new JTextField();
+		jtextInput.setFont(UIConstants.FONT_19);
 		jtextInput.setBounds(432, 45, 217, 35);
 		jtextInput.setColumns(10);
 
@@ -90,10 +92,12 @@ public class HotelStaffUIPanel extends JPanel {
 		jlHotelName.setFont(UIConstants.JLABEL_FONT);
 
 		jtextPassword = new JTextField();
+		jtextPassword.setFont(UIConstants.FONT_17);
 		jtextPassword.setBounds(218, 183, 196, 35);
 		jtextPassword.setColumns(10);
 
 		jtextRealName = new JTextField();
+		jtextRealName.setFont(UIConstants.FONT_17);
 		jtextRealName.setBounds(218, 246, 196, 35);
 		jtextRealName.setColumns(10);
 
@@ -104,10 +108,13 @@ public class HotelStaffUIPanel extends JPanel {
 		jbModifyHotelStaff.addMouseListener(modifyHotelStaffMouseListener);
 
 		jlHotelNameShow = new JLabel();
+		jlHotelNameShow.setFont(UIConstants.FONT_19);
 		jlHotelNameShow.setBounds(218, 309, 196, 26);
 
 		jlUsernameShow = new JLabel();
+		jlUsernameShow.setFont(UIConstants.FONT_19);
 		jlUsernameShow.setBounds(218, 126, 196, 29);
+		
 		setLayout(null);
 		add(jlSearchHotelStaff);
 		add(jcomboBoxType);

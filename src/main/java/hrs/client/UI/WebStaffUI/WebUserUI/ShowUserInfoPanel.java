@@ -70,28 +70,38 @@ public class ShowUserInfoPanel extends JPanel {
 		jlCredit.setFont(UIConstants.FONT_18);
 
 		jtextPassword = new JTextField();
+		jtextPassword.setFont(UIConstants.FONT_17);
 		jtextPassword.setBounds(171, 89, 253, 38);
 		jtextPassword.setColumns(10);
 
 		jtextRealName = new JTextField();
+		jtextRealName.setFont(UIConstants.FONT_17);
 		jtextRealName.setBounds(171, 145, 253, 38);
 		jtextRealName.setColumns(10);
 
 		jtextBirthdayShow = new DateChoosePanel();
+		jtextBirthdayShow.dayBox.setBounds(180, 5, 50, 30);
+		jtextBirthdayShow.monthBox.setSize(50, 30);
+		jtextBirthdayShow.yearBox.setBounds(0, 5, 70, 30);
+		jtextBirthdayShow.monthBox.setLocation(99, 5);
 		jtextBirthdayShow.changeTobirth();
-		jtextBirthdayShow.setBounds(171, 208, 253, 38);
+		jtextBirthdayShow.setBounds(171, 201, 253, 35);
 
 		jtextPhone = new JTextField();
+		jtextPhone.setFont(UIConstants.FONT_17);
 		jtextPhone.setBounds(171, 257, 253, 38);
 		jtextPhone.setColumns(10);
 
 		jlUsernameShow = new JLabel();
+		jlUsernameShow.setFont(UIConstants.FONT_19);
 		jlUsernameShow.setBounds(171, 36, 253, 38);
 
 		jlEnterpriseShow = new JLabel();
+		jlEnterpriseShow.setFont(UIConstants.FONT_19);
 		jlEnterpriseShow.setBounds(171, 313, 253, 38);
 
 		jlCreditvalue = new JLabel();
+		jlCreditvalue.setFont(UIConstants.FONT_19);
 		jlCreditvalue.setBounds(171, 369, 253, 38);
 
 		setLayout(null);

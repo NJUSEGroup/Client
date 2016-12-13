@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class WebOrderPanel extends JPanel {
 	/**
@@ -67,20 +68,23 @@ public class WebOrderPanel extends JPanel {
 		jlNumberOfPO.setFont(UIConstants.FONT_17);
 
 		jlSearch = new JLabel("搜索");
+		jlSearch.setFont(UIConstants.FONT_17);
 		jlSearch.setBounds(31, 23, 42, 26);
 		jlSearch.setFont(UIConstants.FONT_21);
 
 		comboBox = new JComboBox<Object>();
+		comboBox.setFont(UIConstants.FONT_17);
 		comboBox.setBounds(91, 25, 139, 27);
 		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] { "用户名", "订单号" }));
 
 		textField = new JTextField();
+		textField.setFont(UIConstants.FONT_17);
 		textField.setBounds(248, 23, 130, 28);
 		textField.setColumns(10);
 
 		jbSearchConfirm = new HMSBlueButton("搜索");
-		jbSearchConfirm.setBounds(396, 23, 85, 29);
-		jbSearchConfirm.setFont(UIConstants.FONT_17);
+		jbSearchConfirm.setBounds(420, 23, 71, 29);
+		jbSearchConfirm.setFont(new Font("宋体", Font.PLAIN, 18));
 		jbSearchConfirm.addMouseListener(new SearchConfirmMouseListener(this));
 
 		jTable = new JTable();
