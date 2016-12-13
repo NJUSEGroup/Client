@@ -361,6 +361,7 @@ public class PlaceOrderPanel extends CommonPanel {
 	public void order() {
 		if (!isTextValid(peopleNumField.getText())) {
 			JOptionPane.showMessageDialog(null, "人数必须为数字!", "提示", JOptionPane.INFORMATION_MESSAGE);
+			return;
 		}
 		int result = JOptionPane.showConfirmDialog(null, "是否确认下单？", "提示", JOptionPane.YES_NO_OPTION);
 		if (result == JOptionPane.YES_OPTION) {

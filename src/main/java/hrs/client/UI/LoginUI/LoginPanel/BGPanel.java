@@ -11,12 +11,15 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import hrs.client.util.ImageLoader;
+
 public class BGPanel extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -744509764250621908L;
-	Image IMG_BG=new ImageIcon("src/main/resources/imgs/LoginUI/bg.png").getImage();;
+	private ImageLoader loader = ImageLoader.getInstance();
+	private Image IMG_BG = loader.getIcon("LoginUI/bg.png").getImage();;
 	
 	@Override
 	public void paintComponent(Graphics g){
