@@ -1,6 +1,5 @@
 package hrs.client.util;
 
-import org.hibernate.engine.transaction.jta.platform.internal.SynchronizationRegistryBasedSynchronizationStrategy;
 
 public class RegExpHelper {
 	/**

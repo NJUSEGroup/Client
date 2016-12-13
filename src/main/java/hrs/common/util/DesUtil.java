@@ -51,6 +51,7 @@ public class DesUtil implements Serializable{
 			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * DES算法，加密
 	 *

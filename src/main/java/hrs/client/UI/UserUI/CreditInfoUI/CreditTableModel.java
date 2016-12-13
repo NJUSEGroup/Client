@@ -9,7 +9,6 @@ import javax.swing.table.TableModel;
 
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
-import aj.org.objectweb.asm.Type;
 import hrs.common.VO.CreditRecordVO;
 import hrs.common.util.DateHelper;
 import hrs.common.util.type.CreditRecordType;

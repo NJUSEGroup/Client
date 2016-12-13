@@ -3,33 +3,17 @@ package hrs.client.UI.LoginUI;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Panel;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.EmptyBorder;
 
-import org.aspectj.lang.reflect.InitializerSignature;
-import org.springframework.web.bind.annotation.InitBinder;
-
-import hrs.client.UI.HotelUI.HotelFrame.HotelFrame;
 import hrs.client.UI.LoginUI.LoginPanel.BGPanel;
 import hrs.client.UI.LoginUI.LoginPanel.LoginPanel;
 import hrs.client.UI.LoginUI.RegisterPanel.RegisterPanel;
 import hrs.client.UI.UserUI.UserFrame;
 import hrs.client.UI.WebMarketUI.WebMarketFrame;
 import hrs.client.UI.WebStaffUI.WebStaffFrame;
-import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketerUIPanel;
-import hrs.client.util.ControllerFactory;
-import hrs.client.util.ImageLoader;
-import hrs.client.util.UIConstants;
-import hrs.common.Controller.LoginController.ILoginController;
 import hrs.common.VO.StaffVO;
 import hrs.common.VO.UserVO;
 import hrs.common.util.type.StaffType;

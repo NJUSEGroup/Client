@@ -1,12 +1,9 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
-import java.util.ArrayList;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import antlr.collections.List;
 import hrs.client.UI.UserUI.Components.CommonLabel;
 import hrs.client.util.UIConstants;
 /**

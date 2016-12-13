@@ -12,7 +12,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import android.R.integer;
 import hrs.common.util.DateHelper;
 
 /**

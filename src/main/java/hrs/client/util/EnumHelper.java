@@ -2,7 +2,6 @@ package hrs.client.util;
 
 import java.util.HashMap;
 
-import aj.org.objectweb.asm.Type;
 import hrs.common.util.type.OrderStatus;
 import hrs.common.util.type.RoomType;
 /**
