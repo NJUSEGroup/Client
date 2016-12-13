@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import hrs.client.UI.WebStaffUI.WebStaffListener.UserLabelMouseListener;
 import hrs.client.UI.WebStaffUI.WebStaffListener.WebStaffMenulistMouseListener;
+import hrs.client.util.ImageLoader;
 import hrs.client.util.UIConstants;
 
 public class MenulistPanel extends JPanel {
@@ -37,6 +38,7 @@ public class MenulistPanel extends JPanel {
 	}
 
 	public void init() {
+		ImageLoader loader = ImageLoader.getInstance();
 		listener = new WebStaffMenulistMouseListener();
 
 		setBackground(UIConstants.JFRAME);
@@ -57,7 +59,7 @@ public class MenulistPanel extends JPanel {
 		jlUsername.setBounds(0, 108, 263, 29);
 		jlUsername.setFont(UIConstants.JLABEL_FONT);
 
-		webUser = new ImageIcon("src/main/resources/imgs/WebStaffUI/WebUser.png");
+		webUser = loader.getIcon("WebStaffUI/WebUser.png");
 		webUser.setImage(webUser.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 
 		jlUserInfo = new JLabel("用户信息管理", JLabel.CENTER);
@@ -68,7 +70,7 @@ public class MenulistPanel extends JPanel {
 		jlUserInfo.setOpaque(true);
 		jlUserInfo.setBackground(UIConstants.JLABEL);
 
-		jlUser = new JLabel("•用户          ", JLabel.CENTER);
+		jlUser = new JLabel("•用户       ", JLabel.CENTER);
 		jlUser.setBounds(0, 265, 263, 45);
 		jlUser.setFont(UIConstants.JLABEL_FONT);
 		jlUser.addMouseListener(listener);
@@ -93,7 +95,7 @@ public class MenulistPanel extends JPanel {
 		webMarketerLabelMouseListener = new UserLabelMouseListener(jlWebMarketer, this);
 		jlWebMarketer.addMouseListener(webMarketerLabelMouseListener);
 
-		hotelAdd = new ImageIcon("src/main/resources/imgs/WebStaffUI/AddHotel.png");
+		hotelAdd = loader.getIcon("WebStaffUI/AddHotel.png");
 		hotelAdd.setImage(hotelAdd.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 
 		jlHotelAdd = new JLabel("酒店信息添加", JLabel.CENTER);

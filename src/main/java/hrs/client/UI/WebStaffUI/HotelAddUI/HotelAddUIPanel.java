@@ -55,6 +55,7 @@ public class HotelAddUIPanel extends JPanel {
 		jlHotelName.setFont(UIConstants.FONT_19);
 
 		jtextHotelName = new JTextField();
+		jtextHotelName.setFont(UIConstants.FONT_19);
 		jtextHotelName.setColumns(10);
 
 		jbNextStep = new HMSBlueButton("下一步");

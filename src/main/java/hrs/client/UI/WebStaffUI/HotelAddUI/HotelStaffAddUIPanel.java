@@ -76,6 +76,7 @@ public class HotelStaffAddUIPanel extends JPanel {
 		jlHotelStaffUsername.setFont(UIConstants.FONT_19);
 
 		jtextHotelStaffUsrname = new JTextField();
+		jtextHotelStaffUsrname.setFont(UIConstants.FONT_19);
 		jtextHotelStaffUsrname.setColumns(10);
 
 		jbLastStep = new HMSBlueButton("上一步");
@@ -101,12 +102,15 @@ public class HotelStaffAddUIPanel extends JPanel {
 		jlHotelStaffRealName.setFont(UIConstants.FONT_19);
 
 		jtextPassword = new JTextField();
+		jtextPassword.setFont(UIConstants.FONT_19);
 		jtextPassword.setColumns(10);
 
 		jtextPasswordConfirm = new JTextField();
+		jtextPasswordConfirm.setFont(UIConstants.FONT_19);
 		jtextPasswordConfirm.setColumns(10);
 
 		jtextRealName = new JTextField();
+		jtextRealName.setFont(UIConstants.FONT_19);
 		jtextRealName.setColumns(10);
 
 		GroupLayout groupLayout = new GroupLayout(this);

@@ -96,57 +96,67 @@ public class AddWebDiscountDialog extends JDialog {
 
 		jlPromotionType = new JLabel("折扣类型");
 		jlPromotionType.setFont(UIConstants.FONT_16);
-		jlPromotionType.setBounds(108, 15, 76, 16);
+		jlPromotionType.setBounds(108, 15, 76, 26);
 
 		jlBeginTime = new JLabel("开始时间");
 		jlBeginTime.setFont(UIConstants.FONT_16);
-		jlBeginTime.setBounds(108, 62, 76, 16);
+		jlBeginTime.setBounds(108, 57, 76, 34);
 
 		jlEndTime = new JLabel("结束时间");
 		jlEndTime.setFont(UIConstants.FONT_16);
-		jlEndTime.setBounds(108, 109, 76, 16);
+		jlEndTime.setBounds(108, 104, 76, 34);
 
 		jlLocation = new JLabel("城市");
 		jlLocation.setFont(UIConstants.FONT_16);
-		jlLocation.setBounds(108, 156, 76, 16);
+		jlLocation.setBounds(108, 151, 76, 34);
 
 		jlCommercialCircle = new JLabel("商圈");
 		jlCommercialCircle.setFont(UIConstants.FONT_16);
-		jlCommercialCircle.setBounds(108, 203, 76, 16);
+		jlCommercialCircle.setBounds(108, 198, 76, 34);
 
 		jlVIPLevel = new JLabel("VIP等级");
 		jlVIPLevel.setFont(UIConstants.FONT_16);
-		jlVIPLevel.setBounds(108, 250, 76, 16);
+		jlVIPLevel.setBounds(108, 245, 76, 34);
 
 		jlDiscount = new JLabel("折扣信息");
 		jlDiscount.setFont(UIConstants.FONT_16);
-		jlDiscount.setBounds(108, 297, 76, 16);
+		jlDiscount.setBounds(108, 292, 76, 34);
 
 		jcomboBoxType = new JComboBox<>();
-		jcomboBoxType.setBounds(259, 15, 261, 27);
+		jcomboBoxType.setFont(UIConstants.FONT_17);
+		jcomboBoxType.setBounds(238, 16, 261, 27);
 		jcomboBoxType.addItem("会员等级折扣");
 		jcomboBoxType.addItem("特定期间折扣");
 		jcomboBoxType.addItem("特定商圈专属折扣");
 		jcomboBoxType.setSelectedIndex(-1);
 
 		jtextBegintime = new DateChoosePanel();
-		jtextBegintime.setBounds(259, 52, 261, 33);
+		jtextBegintime.dayBox.setBounds(180, 5, 50, 28);
+		jtextBegintime.monthBox.setBounds(100, 5, 50, 28);
+		jtextBegintime.yearBox.setBounds(0, 5, 70, 28);
+		jtextBegintime.setBounds(238, 60, 261, 33);
 
 		jtextEndtime = new DateChoosePanel();
-		jtextEndtime.setBounds(259, 100, 261, 32);
+		jtextEndtime.dayBox.setBounds(180, 5, 50, 27);
+		jtextEndtime.monthBox.setBounds(100, 5, 50, 27);
+		jtextEndtime.yearBox.setBounds(0, 5, 70, 27);
+		jtextEndtime.setBounds(238, 106, 261, 32);
 
 		jcomboBoxLocation = new JComboBox<>();
+		jcomboBoxLocation.setFont(UIConstants.FONT_17);
 		for (int i = 0; i < locToName().length; i++) {
 			jcomboBoxLocation.addItem(locToName()[i]);
 		}
-		jcomboBoxLocation.setBounds(259, 156, 261, 27);
+		jcomboBoxLocation.setBounds(238, 156, 261, 27);
 		jcomboBoxLocation.setSelectedIndex(-1);
 
 		jcomboBoxCommercialCircle = new JComboBox<>();
-		jcomboBoxCommercialCircle.setBounds(259, 203, 261, 27);
+		jcomboBoxCommercialCircle.setFont(UIConstants.FONT_17);
+		jcomboBoxCommercialCircle.setBounds(238, 203, 261, 27);
 
 		jcomboBoxVIPLevel = new JComboBox<>();
-		jcomboBoxVIPLevel.setBounds(259, 250, 261, 27);
+		jcomboBoxVIPLevel.setFont(UIConstants.FONT_16);
+		jcomboBoxVIPLevel.setBounds(238, 250, 261, 27);
 		jcomboBoxVIPLevel.addItem("1");
 		jcomboBoxVIPLevel.addItem("2");
 		jcomboBoxVIPLevel.addItem("3");
@@ -155,13 +165,14 @@ public class AddWebDiscountDialog extends JDialog {
 		jcomboBoxVIPLevel.setSelectedIndex(-1);
 
 		jtextDiscount = new JTextField();
-		jtextDiscount.setBounds(259, 297, 261, 26);
+		jtextDiscount.setFont(UIConstants.FONT_17);
+		jtextDiscount.setBounds(238, 297, 261, 26);
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText("");
 
 		jbOK = new HMSBlueButton("确认添加");
-		jbOK.setBounds(165, 353, 92, 29);
-		jbOK.setFont(UIConstants.FONT_13);
+		jbOK.setBounds(165, 348, 92, 34);
+		jbOK.setFont(UIConstants.FONT_17);
 		listener = new OKListener(jpWebDiscount, this);
 		jbOK.addMouseListener(listener);
 
@@ -170,8 +181,8 @@ public class AddWebDiscountDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		jbCancel.setBounds(353, 353, 92, 29);
-		jbCancel.setFont(UIConstants.FONT_13);
+		jbCancel.setBounds(326, 348, 92, 34);
+		jbCancel.setFont(UIConstants.FONT_17);
 		cancelAddListener = new CancelAddListener(this);
 		jbCancel.addMouseListener(cancelAddListener);
 

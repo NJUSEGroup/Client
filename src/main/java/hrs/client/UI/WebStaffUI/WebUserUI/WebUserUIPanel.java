@@ -48,6 +48,7 @@ public class WebUserUIPanel extends JPanel {
 		jlUserSearch.setFont(UIConstants.JLABEL_FONT);
 
 		jtextUsername = new JTextField();
+		jtextUsername.setFont(UIConstants.FONT_17);
 		jtextUsername.setBounds(175, 37, 253, 38);
 		jtextUsername.setColumns(10);
 

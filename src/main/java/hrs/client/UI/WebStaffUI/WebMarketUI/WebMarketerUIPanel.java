@@ -69,20 +69,23 @@ public class WebMarketerUIPanel extends JPanel {
 		jlWebMarketerRealName.setFont(UIConstants.JLABEL_FONT);
 
 		jtextWebMarketerUsername = new JTextField();
+		jtextWebMarketerUsername.setFont(UIConstants.FONT_19);
 		jtextWebMarketerUsername.setBounds(298, 53, 215, 37);
 		jtextWebMarketerUsername.setColumns(10);
 
 		jtextPassword = new JTextField();
+		jtextPassword.setFont(UIConstants.FONT_19);
 		jtextPassword.setBounds(298, 198, 215, 37);
 		jtextPassword.setColumns(10);
 
 		jtextWebMarketerRealName = new JTextField();
+		jtextWebMarketerRealName.setFont(UIConstants.FONT_19);
 		jtextWebMarketerRealName.setBounds(298, 276, 215, 37);
 		jtextWebMarketerRealName.setColumns(10);
 
 		jbSearchWebMarketerConfirm = new HMSBlueButton("搜索");
 		jbSearchWebMarketerConfirm.setBounds(579, 54, 76, 32);
-		jbSearchWebMarketerConfirm.setFont(UIConstants.FONT_18);
+		jbSearchWebMarketerConfirm.setFont(UIConstants.FONT_19);
 		searchWebMarketerConfirmMouseListener = new SearchWebMarketerConfirmMouseListener(this);
 		jbSearchWebMarketerConfirm.addMouseListener(searchWebMarketerConfirmMouseListener);
 
@@ -100,6 +103,8 @@ public class WebMarketerUIPanel extends JPanel {
 
 		jlUsernameShow = new JLabel();
 		jlUsernameShow.setBounds(298, 131, 215, 24);
+		jlUsernameShow.setFont(UIConstants.FONT_19);
+		
 		setLayout(null);
 		add(jlWebMarketerSearch);
 		add(jlWebMarketerUsername);

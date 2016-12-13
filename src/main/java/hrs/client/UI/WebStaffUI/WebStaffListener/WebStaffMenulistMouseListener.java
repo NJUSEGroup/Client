@@ -23,7 +23,7 @@ public class WebStaffMenulistMouseListener implements MouseListener {
 		// TODO Auto-generated method stub
 		jLabel = (JLabel) e.getSource();
 		String string = jLabel.getText();
-		if (string.equals("•用户          ")) {
+		if (string.equals("•用户       ")) {
 			cardLayout.show(jPanel, "用户");
 		} else if (string.equals("•酒店工作人员")) {
 			cardLayout.show(jPanel, "酒店工作人员");
