@@ -59,34 +59,38 @@ public class VIPDiaog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 
 		jlVIP = new JLabel("VIP等级");
-		jlVIP.setBounds(81, 51, 61, 16);
+		jlVIP.setFont(UIConstants.FONT_17);
+		jlVIP.setBounds(81, 51, 75, 16);
 		getContentPane().add(jlVIP);
 
 		jlDiscount = new JLabel("折扣信息");
-		jlDiscount.setBounds(81, 99, 61, 16);
+		jlDiscount.setFont(UIConstants.FONT_17);
+		jlDiscount.setBounds(81, 99, 75, 16);
 		getContentPane().add(jlDiscount);
 
 		jtextDiscount = new JTextField();
+		jtextDiscount.setFont(UIConstants.FONT_17);
 		jtextDiscount.setBounds(185, 94, 130, 26);
 		getContentPane().add(jtextDiscount);
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText(webDiscountVO.discount + "");
 
 		jcomboBoxVIP = new JComboBox<Object>();
+		jcomboBoxVIP.setFont(UIConstants.FONT_18);
 		jcomboBoxVIP.setModel(new DefaultComboBoxModel<Object>(new String[] { "1", "2", "3", "4", "5" }));
 		jcomboBoxVIP.setBounds(185, 47, 130, 27);
 		getContentPane().add(jcomboBoxVIP);
 		jcomboBoxVIP.setSelectedIndex(webDiscountVO.VIPlevel - 1);
 
 		jbComfirmModify = new HMSBlueButton("确认修改");
-		jbComfirmModify.setFont(UIConstants.FONT_13);
+		jbComfirmModify.setFont(UIConstants.FONT_16);
 		jbComfirmModify.setBounds(90, 157, 96, 29);
 		getContentPane().add(jbComfirmModify);
 		listener = new ConfirmModifyVIPListener(webDiscountPanel, this);
 		jbComfirmModify.addMouseListener(listener);
 
 		jbCancelModify = new HMSBlueButton("取消修改");
-		jbCancelModify.setFont(UIConstants.FONT_13);
+		jbCancelModify.setFont(UIConstants.FONT_16);
 		jbCancelModify.setBounds(206, 157, 96, 29);
 		getContentPane().add(jbCancelModify);
 		cancelListener = new CancelModifyVIPListener(this);

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import hrs.client.UI.WebMarketUI.Listener.MenulistPanelMouseListener;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
+import hrs.client.util.ImageLoader;
 import hrs.client.util.UIConstants;
 
 public class MenulistPanel extends JPanel {
@@ -32,8 +33,8 @@ public class MenulistPanel extends JPanel {
 	private Font jlabel_font = UIConstants.JLABEL_FONT;
 	private WebMarketFrame webMarketFrame;
 
-	public MenulistPanel(WebOrderPanel webOrderPanel,WebMarketFrame webMarketFrame) {
-		this.webMarketFrame=webMarketFrame;
+	public MenulistPanel(WebOrderPanel webOrderPanel, WebMarketFrame webMarketFrame) {
+		this.webMarketFrame = webMarketFrame;
 		this.webOrderPanel = webOrderPanel;
 		init();
 	}
@@ -42,6 +43,8 @@ public class MenulistPanel extends JPanel {
 		setBounds(5, 5, 263, 722);
 		setLayout(null);
 		setBackground(UIConstants.JFRAME);
+
+		ImageLoader loader = ImageLoader.getInstance();
 
 		jlZone = new JLabel("网站营销中心", JLabel.CENTER);
 		jlZone.setBounds(0, 0, 263, 79);
@@ -58,7 +61,7 @@ public class MenulistPanel extends JPanel {
 		jlUsername.setBounds(0, 108, 263, 29);
 		jlUsername.setFont(UIConstants.JLABEL_FONT);
 
-		webDiscount = new ImageIcon("src/main/resources/imgs/WebMarketUI/WebDiscount.png");
+		webDiscount = loader.getIcon("WebMarketUI/WebDiscount.png");
 		webDiscount.setImage(webDiscount.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 
 		jlPromotion = new JLabel("促销策略", JLabel.CENTER);
@@ -71,7 +74,7 @@ public class MenulistPanel extends JPanel {
 		jpMenulistMouseListener = new MenulistPanelMouseListener();
 		jlPromotion.addMouseListener(jpMenulistMouseListener);
 
-		abnormalOrder = new ImageIcon("src/main/resources/imgs/WebMarketUI/AbnormalOrder.png");
+		abnormalOrder = loader.getIcon("WebMarketUI/AbnormalOrder.png");
 		abnormalOrder.setImage(abnormalOrder.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 
 		jlAbnormal = new JLabel("异常订单", JLabel.CENTER);
@@ -88,7 +91,7 @@ public class MenulistPanel extends JPanel {
 			}
 		});
 
-		creditCharge = new ImageIcon("src/main/resources/imgs/WebMarketUI/CreditCharge.png");
+		creditCharge = loader.getIcon("WebMarketUI/CreditCharge.png");
 		creditCharge.setImage(creditCharge.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 
 		jlCreditCharge = new JLabel("信用充值", JLabel.CENTER);

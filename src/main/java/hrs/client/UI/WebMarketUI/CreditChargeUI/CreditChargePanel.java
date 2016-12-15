@@ -22,6 +22,7 @@ import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebCreditController;
 import hrs.common.Exception.UserService.UserNotFoundException;
 import hrs.common.VO.UserVO;
+import java.awt.Font;
 
 public class CreditChargePanel extends JPanel {
 	/**
@@ -59,10 +60,12 @@ public class CreditChargePanel extends JPanel {
 		jlFindUser.setFont(UIConstants.JLABEL_FONT);
 
 		jtUsername = new JTextField();
+		jtUsername.setFont(UIConstants.FONT_18);
 		jtUsername.setBounds(193, 23, 219, 36);
 		jtUsername.setColumns(10);
 
 		jbConfirm = new HMSBlueButton("搜索");
+		jbConfirm.setFont(UIConstants.FONT_17);
 		jbConfirm.setBounds(483, 25, 85, 35);
 		jbConfirm.setFont(UIConstants.FONT_18);
 		jbConfirm.addMouseListener(new ConfirmMouseListener(this));
@@ -70,9 +73,10 @@ public class CreditChargePanel extends JPanel {
 		jlChargeValue = new JLabel("充值额度");
 		jlChargeValue.setBounds(14, 248, 114, 32);
 		jlChargeValue.setHorizontalAlignment(SwingConstants.CENTER);
-		jlChargeValue.setFont(UIConstants.FONT_20);
+		jlChargeValue.setFont(new Font("宋体", Font.PLAIN, 21));
 
 		jtChargeValue = new JTextField();
+		jtChargeValue.setFont(UIConstants.FONT_17);
 		jtChargeValue.setBounds(193, 249, 219, 36);
 		jtChargeValue.setColumns(10);
 
@@ -147,9 +151,9 @@ public class CreditChargePanel extends JPanel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 			creditChargeModel = new CreditChargeModel(userVO);
 			jTable.setModel(creditChargeModel);
+			JOptionPane.showMessageDialog(null,"信用充值成功！");
 			jtChargeValue.setText("");
 		}
 

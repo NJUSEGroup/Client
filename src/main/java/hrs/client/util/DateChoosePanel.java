@@ -113,7 +113,7 @@ public class DateChoosePanel extends JPanel {
 			return;
 		}
 		currentTm.set(Calendar.YEAR, (Integer) yearBox.getSelectedItem());
-		System.out.println("有改变"+monthBox.getSelectedItem());
+//		System.out.println("有改变"+monthBox.getSelectedItem());
 		currentTm.set(Calendar.MONTH, (Integer) monthBox.getSelectedItem() - 1);
 		dayBox.removeAllItems();
 		int MaxDay = currentTm.getActualMaximum(Calendar.DATE);
