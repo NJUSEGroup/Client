@@ -2,6 +2,8 @@ package hrs.client.UI.HotelUI.HotelOrderUI.Listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
 import hrs.common.VO.OrderVO;
@@ -24,7 +26,10 @@ public class DelayCheckinListener implements MouseListener{
 			int row = jpHotelOrder.getSelectedRow();
 			OrderVO order = jpHotelOrder.getSelectedOrder(row);
 			jpHotelOrder.delayCheckin(order);
-			jpHotelOrder.refreshOrderList(jpHotelOrder.getAllOrders());
+			order = jpHotelOrder.getSelectedOrder(row);
+			List<OrderVO> orders = new ArrayList<OrderVO>();
+			orders.add(order);
+			jpHotelOrder.refreshOrderList(orders);
 		}
 	}
 

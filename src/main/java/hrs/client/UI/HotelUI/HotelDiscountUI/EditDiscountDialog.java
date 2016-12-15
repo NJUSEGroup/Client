@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -336,18 +337,25 @@ public class EditDiscountDialog extends JDialog {
 			}
 		}
 		else if(theDiscount.type==HotelDiscountType.SpecialPeriod){
-			theDiscount.beginTime = dcpBegin.getDate();
-			theDiscount.endTime = dcpEnd.getDate();
-			theDiscount.discount = discount;
+			Date begin = dcpBegin.getDate();
+			Date end = dcpEnd.getDate();
+			if(end.before(begin)){
+				JOptionPane.showMessageDialog(null, "开始时间应早于结束时间！", "错误", JOptionPane.ERROR_MESSAGE);
+			}
+			else{
+				theDiscount.beginTime = dcpBegin.getDate();
+				theDiscount.endTime = dcpEnd.getDate();
+				theDiscount.discount = discount;
 			
-			controller.update(theDiscount);
+				controller.update(theDiscount);
 			
-			jpDiscountUI.getAllDiscounts();
-			jpDiscountUI.refresh();
+				jpDiscountUI.getAllDiscounts();
+				jpDiscountUI.refresh();
 			
-			this.dispose();
+				this.dispose();
 			
-			JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);	
+				JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);	
+			}
 		}
 		}
 	}

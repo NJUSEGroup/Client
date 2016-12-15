@@ -3,6 +3,7 @@ package hrs.client.UI.HotelUI.HotelDiscountUI;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -330,19 +331,26 @@ public class AddDiscountDialog extends JDialog {
 				JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);	
 			}
 			else if(type.equals("特定期间折扣")){
-				newDiscount.type = HotelDiscountType.SpecialPeriod;
-				newDiscount.beginTime = dcpBegin.getDate();
-				newDiscount.endTime = dcpEnd.getDate();
-				newDiscount.discount = discount;
+				Date begin = dcpBegin.getDate();
+				Date end = dcpEnd.getDate();
+				if(end.before(begin)){
+					JOptionPane.showMessageDialog(null, "开始时间应早于结束时间！", "错误", JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					newDiscount.type = HotelDiscountType.SpecialPeriod;
+					newDiscount.beginTime = begin;
+					newDiscount.endTime = end;
+					newDiscount.discount = discount;
 				
-				controller.add(newDiscount);
+					controller.add(newDiscount);
 				
-				jpDiscountUI.getAllDiscounts();
-				jpDiscountUI.refresh();
+					jpDiscountUI.getAllDiscounts();
+					jpDiscountUI.refresh();
 				
-				this.dispose();
+					this.dispose();
 				
-				JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);	
+					JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		}
 	}
