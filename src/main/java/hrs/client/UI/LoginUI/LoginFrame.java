@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import hrs.client.UI.HotelUI.HotelFrame.HotelFrame;
 import hrs.client.UI.LoginUI.LoginPanel.BGPanel;
 import hrs.client.UI.LoginUI.LoginPanel.LoginPanel;
 import hrs.client.UI.LoginUI.RegisterPanel.RegisterPanel;
@@ -143,9 +144,9 @@ public class LoginFrame extends JFrame {
 		StaffType type = staffVO.type;
 		switch (type) {
 		case HotelStaff:
-//			HotelFrame hotelFrame = new HotelFrame(staffVO);
-//			hotelFrame.setVisible(true);
-//			this.dispose();
+			HotelFrame hotelFrame = new HotelFrame(staffVO);
+			hotelFrame.setVisible(true);
+			this.dispose();
 			break;
 		case WebsiteAdminister:
 			WebStaffFrame  webStaffFrame= new WebStaffFrame(staffVO);

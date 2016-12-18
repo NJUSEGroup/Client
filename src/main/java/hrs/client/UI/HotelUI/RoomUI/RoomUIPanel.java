@@ -17,8 +17,6 @@ import javax.swing.table.JTableHeader;
 
 import hrs.client.UI.HotelUI.Components.RoomTableModel;
 import hrs.client.UI.HotelUI.RoomUI.Listener.AddListener;
-import hrs.client.UI.HotelUI.RoomUI.Listener.EditListener;
-import hrs.client.UI.HotelUI.RoomUI.Listener.RoomSelectedListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.HMSBlueButton;
 import hrs.client.util.UIConstants;
@@ -41,15 +39,12 @@ public class RoomUIPanel extends JPanel {
 	private JTableHeader jthOrderList;
 	private RoomTableModel roomTableModel;
 	private HMSBlueButton jbAdd;
-	private HMSBlueButton jbEdit;
 	private JLabel jlTotal;
 	private JLabel jlNum;
 	private JLabel jlRecord;
 	private HotelVO theHotel;
 	private IRoomController roomController;
 	private AddListener addListener;
-	private EditListener editListener;
-	private RoomSelectedListener roomSelectedListener;
 	private List<RoomVO> rooms;
 	private Color panelColor;
 	private Color tableHeadColor;
@@ -112,8 +107,6 @@ public class RoomUIPanel extends JPanel {
 			JOptionPane.showMessageDialog(null, "您的酒店尚未录入客房！", "提示", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
-		roomSelectedListener = new RoomSelectedListener(this);
-		
 		roomTableModel = new RoomTableModel(rooms);
 		
 		jtRoom = new JTable(roomTableModel);
@@ -121,7 +114,6 @@ public class RoomUIPanel extends JPanel {
 		jtRoom.setFont(font);
 		jtRoom.setRowHeight(40);
 		jtRoom.setShowVerticalLines(false);
-		jtRoom.addMouseListener(roomSelectedListener);
 		
 		jthOrderList = jtRoom.getTableHeader(); 
 		jthOrderList.setPreferredSize(new Dimension(jtRoom.getWidth(),40)); 
@@ -164,15 +156,7 @@ public class RoomUIPanel extends JPanel {
 		jbAdd.setBounds(736, 13, 90, 40);
 		jbAdd.addMouseListener(addListener);
 		
-		editListener = new EditListener(this);
-		
-		jbEdit = new HMSBlueButton("修改");
-		jbEdit.setBounds(905, 13, 90, 40);
-		jbEdit.setEnabled(false);
-		jbEdit.addMouseListener(editListener);
-		
 		jpButton.add(jbAdd);
-		jpButton.add(jbEdit);
 		jpButton.add(jlTotal);
 		jpButton.add(jlNum);
 		jpButton.add(jlRecord);
@@ -194,13 +178,6 @@ public class RoomUIPanel extends JPanel {
 	public void addRoom(RoomVO newRoom) {
 		newRoom.hotel = theHotel;
 		roomController.addRoom(newRoom);
-	}
-	
-	/**
-	 * 点击修改按钮，弹出修改房间对话框
-	 */
-	public void edit(){
-		EditRoomDialog editRoomDialog = new EditRoomDialog(this);
 	}
 	
 	/**
@@ -227,7 +204,6 @@ public class RoomUIPanel extends JPanel {
 	 * 刷新房间列表
 	 */
 	public void refreshRoomList(){
-		jbEdit.setEnabled(false);
 		try {
 			rooms= roomController.findByHotelID(theHotel.id);
 		} catch (RoomNotFoundException e) {
@@ -237,23 +213,6 @@ public class RoomUIPanel extends JPanel {
 		roomTableModel = new RoomTableModel(rooms);
 		jtRoom.setModel(roomTableModel);
 		jlNum.setText(Integer.toString(rooms.size()));
-	}
-	
-	/**
-	 * 当表格中的某类房间被选中时，修改按钮可用
-	 */
-	public void roomSelected(){
-		if(jtRoom.getSelectedRow() != -1){
-			jbEdit.setEnabled(true);
-		}
-	}
-	
-	/**
-	 * 获取修改按钮的可用状态
-	 * @return
-	 */
-	public boolean isEditEnable(){
-		return jbEdit.isEnabled();
 	}
 
 }
