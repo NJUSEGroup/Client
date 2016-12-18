@@ -3,6 +3,8 @@ package hrs.client.UI.UserUI.CreditInfoUI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -15,7 +17,8 @@ import hrs.common.util.type.CreditRecordType;
 
 public class CreditTableModel implements TableModel {
 	private List<CreditRecordVO> creditList;
-
+	private ResourceBundle rb = ResourceBundle.getBundle("creditAction", Locale.getDefault());
+	
 	public CreditTableModel(List<CreditRecordVO> creditList) {
 		this.creditList = creditList;
 	}
@@ -65,7 +68,8 @@ public class CreditTableModel implements TableModel {
 		List<String> list = new ArrayList<>();
 		list.add(DateHelper.format(info.date));// 第一列为日期
 		list.add(info.order.id+"");// 第二列为id
-		list.add(info.type.toString());// 第三列为动作
+		String type = rb.getString("Credit." + info.type.toString());
+		list.add(type);// 第三列为动作
 		list.add(info.variation+"");// 第四列为信用值变化值
 		list.add(info.currCredit+"");// 第五列为当前信用值
 		return list.get(columnIndex);

@@ -14,6 +14,7 @@ import hrs.client.UI.HotelUI.HotelUI.HotelUIPanel;
 import hrs.client.UI.HotelUI.OfflineRecordUI.OfflineRecordUIPanel;
 import hrs.client.UI.HotelUI.RoomUI.RoomUIPanel;
 import hrs.client.util.ControllerFactory;
+import hrs.client.util.ImageLoader;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IHotelController;
 import hrs.common.Exception.HotelService.HotelNotFoundException;
@@ -61,6 +62,12 @@ public class HotelFrame extends JFrame {
 	private Color frameColor;
 	private Color panelColor;
 	private Color labelColor;
+	private int cardNum = -1;//指示现在显示的是哪张界面
+	private ImageIcon hotelImage;
+	private ImageIcon orderImage;
+	private ImageIcon roomImage;
+	private ImageIcon discountImage;
+	private ImageIcon recordImage;
 	
 	public static void main(String args[])
 	{
@@ -179,9 +186,10 @@ public class HotelFrame extends JFrame {
 	 */
 	public void setMenuList(){
 		menuListListener = new MenuListListener(this);
+		ImageLoader loader = ImageLoader.getInstance();		
 		
-		ImageIcon hotelInfo =new ImageIcon("src/main/resources/imgs/HotelFrame/HotelInfo.png");
-		hotelInfo.setImage(hotelInfo.getImage().getScaledInstance(35,35,Image.SCALE_DEFAULT));
+		hotelImage = loader.getIcon("HotelFrame/HotelInfo.png");
+		hotelImage.setImage(hotelImage.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		jlHotelInfo = new JLabel();
 		jlHotelInfo.setBounds(0, 200, 263, 65);
 		jlHotelInfo.setText("酒店信息");
@@ -191,10 +199,10 @@ public class HotelFrame extends JFrame {
 		jlHotelInfo.setOpaque(true);
 		jlHotelInfo.setBackground(labelColor);
 		jlHotelInfo.addMouseListener(menuListListener);
-		jlHotelInfo.setIcon(hotelInfo);
+		jlHotelInfo.setIcon(hotelImage);
 		
-		ImageIcon hotelOrder =new ImageIcon("src/main/resources/imgs/HotelFrame/HotelOrder.png");
-		hotelOrder.setImage(hotelOrder.getImage().getScaledInstance(35,35,Image.SCALE_DEFAULT));
+		orderImage = loader.getIcon("HotelFrame/HotelOrder.png");
+		orderImage.setImage(orderImage.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		jlHotelOrder = new JLabel();
 		jlHotelOrder.setBounds(0, 265, 263, 65);
 		jlHotelOrder.setText("订单管理");
@@ -204,10 +212,10 @@ public class HotelFrame extends JFrame {
 		jlHotelOrder.setOpaque(true);
 		jlHotelOrder.setBackground(labelColor);
 		jlHotelOrder.addMouseListener(menuListListener);
-		jlHotelOrder.setIcon(hotelOrder);
+		jlHotelOrder.setIcon(orderImage);
 		
-		ImageIcon room =new ImageIcon("src/main/resources/imgs/HotelFrame/Room.png");
-		room.setImage(room.getImage().getScaledInstance(35,35,Image.SCALE_DEFAULT));
+		roomImage = loader.getIcon("HotelFrame/Room.png");
+		roomImage.setImage(roomImage.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		jlRoom = new JLabel();
 		jlRoom.setBounds(0, 330, 263, 65);
 		jlRoom.setText("录入客房");
@@ -217,10 +225,10 @@ public class HotelFrame extends JFrame {
 		jlRoom.setOpaque(true);
 		jlRoom.setBackground(labelColor);
 		jlRoom.addMouseListener(menuListListener);
-		jlRoom.setIcon(room);
+		jlRoom.setIcon(roomImage);
 		
-		ImageIcon hotelDiscount =new ImageIcon("src/main/resources/imgs/HotelFrame/HotelDiscount.png");
-		hotelDiscount.setImage(hotelDiscount.getImage().getScaledInstance(35,35,Image.SCALE_DEFAULT));
+		discountImage = loader.getIcon("HotelFrame/HotelDiscount.png");
+		discountImage.setImage(discountImage.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		jlHotelDiscount = new JLabel();
 		jlHotelDiscount.setBounds(0, 395, 263, 65);
 		jlHotelDiscount.setText("促销策略");
@@ -230,10 +238,10 @@ public class HotelFrame extends JFrame {
 		jlHotelDiscount.setOpaque(true);
 		jlHotelDiscount.setBackground(labelColor);
 		jlHotelDiscount.addMouseListener(menuListListener);
-		jlHotelDiscount.setIcon(hotelDiscount);
+		jlHotelDiscount.setIcon(discountImage);
 		
-		ImageIcon offlineRecord =new ImageIcon("src/main/resources/imgs/HotelFrame/OfflineRecord.png");
-		offlineRecord.setImage(offlineRecord.getImage().getScaledInstance(35,35,Image.SCALE_DEFAULT));
+		recordImage = loader.getIcon("HotelFrame/OfflineRecord.png");
+		recordImage.setImage(recordImage.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 		jlOfflineRecord = new JLabel();
 		jlOfflineRecord.setBounds(0, 460, 263, 65);
 		jlOfflineRecord.setText("线下入住");
@@ -243,7 +251,7 @@ public class HotelFrame extends JFrame {
 		jlOfflineRecord.setOpaque(true);
 		jlOfflineRecord.setBackground(labelColor);
 		jlOfflineRecord.addMouseListener(menuListListener);
-		jlOfflineRecord.setIcon(offlineRecord);
+		jlOfflineRecord.setIcon(recordImage);
 		
 		jpMenuList.add(jlHotelInfo);
 		jpMenuList.add(jlHotelOrder);
@@ -253,28 +261,83 @@ public class HotelFrame extends JFrame {
 	}
 	
 	/**
-	 * 根据鼠标点击的标签展示相应界面
+	 * 根据鼠标点击的标签展示相应界面，标签变色
 	 * @param label
 	 */
 	public void show(String label){
 		if(label.equals("酒店信息")){
+			cardNum = 0;
 			card.show(jpCard, "HotelUI");
 			jpHotelUI.showHotelInfo();
+			jlHotelInfo.setBackground(Color.WHITE);
+			jlHotelInfo.setForeground(Color.GRAY);
+			jlHotelOrder.setBackground(labelColor);
+			jlHotelOrder.setForeground(Color.WHITE);
+			jlRoom.setBackground(labelColor);
+			jlRoom.setForeground(Color.WHITE);
+			jlHotelDiscount.setBackground(labelColor);
+			jlHotelDiscount.setForeground(Color.WHITE);
+			jlOfflineRecord.setBackground(labelColor);
+			jlOfflineRecord.setForeground(Color.WHITE);
 		}
 		else if(label.equals("订单管理")){
+			cardNum = 1;
 			card.show(jpCard, "HotelOrderUI");
 			jpHotelOrderUI.refresh();
+			jlHotelInfo.setBackground(labelColor);
+			jlHotelInfo.setForeground(Color.WHITE);
+			jlHotelOrder.setBackground(Color.WHITE);
+			jlHotelOrder.setForeground(Color.GRAY);
+			jlRoom.setBackground(labelColor);
+			jlRoom.setForeground(Color.WHITE);
+			jlHotelDiscount.setBackground(labelColor);
+			jlHotelDiscount.setForeground(Color.WHITE);
+			jlOfflineRecord.setBackground(labelColor);
+			jlOfflineRecord.setForeground(Color.WHITE);
 		}
 		else if(label.equals("录入客房")){
+			cardNum = 2;
 			card.show(jpCard, "RoomUI");
 			jpRoomUI.refreshRoomList();
+			jlHotelInfo.setBackground(labelColor);
+			jlHotelInfo.setForeground(Color.WHITE);
+			jlHotelOrder.setBackground(labelColor);
+			jlHotelOrder.setForeground(Color.WHITE);
+			jlRoom.setBackground(Color.WHITE);
+			jlRoom.setForeground(Color.GRAY);
+			jlHotelDiscount.setBackground(labelColor);
+			jlHotelDiscount.setForeground(Color.WHITE);
+			jlOfflineRecord.setBackground(labelColor);
+			jlOfflineRecord.setForeground(Color.WHITE);
 		}
 		else if(label.equals("促销策略")){
+			cardNum = 3;
 			card.show(jpCard, "HotelDiscountUI");
+			jlHotelInfo.setBackground(labelColor);
+			jlHotelInfo.setForeground(Color.WHITE);
+			jlHotelOrder.setBackground(labelColor);
+			jlHotelOrder.setForeground(Color.WHITE);
+			jlRoom.setBackground(labelColor);
+			jlRoom.setForeground(Color.WHITE);
+			jlHotelDiscount.setBackground(Color.WHITE);
+			jlHotelDiscount.setForeground(Color.GRAY);
+			jlOfflineRecord.setBackground(labelColor);
+			jlOfflineRecord.setForeground(Color.WHITE);
 		}
 		else if(label.equals("线下入住")){
+			cardNum = 4;
 			card.show(jpCard, "OfflineRecordUI");
 			jpOfflineRecordUI.refresh(jpOfflineRecordUI.getAllRecords());
+			jlHotelInfo.setBackground(labelColor);
+			jlHotelInfo.setForeground(Color.WHITE);
+			jlHotelOrder.setBackground(labelColor);
+			jlHotelOrder.setForeground(Color.WHITE);
+			jlRoom.setBackground(labelColor);
+			jlRoom.setForeground(Color.WHITE);
+			jlHotelDiscount.setBackground(labelColor);
+			jlHotelDiscount.setForeground(Color.WHITE);
+			jlOfflineRecord.setBackground(Color.WHITE);
+			jlOfflineRecord.setForeground(Color.GRAY);
 		}
 	}
 	
@@ -314,23 +377,23 @@ public class HotelFrame extends JFrame {
 	public void changeColorWhenExit(MouseEvent e){
 		String label = ((JLabel) e.getSource()).getText();
 		
-		if(label.equals("酒店信息")){
+		if(label.equals("酒店信息")&&cardNum!=0){
 			jlHotelInfo.setBackground(labelColor);
 			jlHotelInfo.setForeground(Color.WHITE);
 		}
-		else if(label.equals("订单管理")){
+		else if(label.equals("订单管理")&&cardNum!=1){
 			jlHotelOrder.setBackground(labelColor);
 			jlHotelOrder.setForeground(Color.WHITE);
 		}
-		else if(label.equals("录入客房")){
+		else if(label.equals("录入客房")&&cardNum!=2){
 			jlRoom.setBackground(labelColor);
 			jlRoom.setForeground(Color.WHITE);
 		}
-		else if(label.equals("促销策略")){
+		else if(label.equals("促销策略")&&cardNum!=3){
 			jlHotelDiscount.setBackground(labelColor);
 			jlHotelDiscount.setForeground(Color.WHITE);
 		}
-		else if(label.equals("线下入住")){
+		else if(label.equals("线下入住")&&cardNum!=4){
 			jlOfflineRecord.setBackground(labelColor);
 			jlOfflineRecord.setForeground(Color.WHITE);
 		}
