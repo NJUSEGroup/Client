@@ -73,8 +73,7 @@ public class HotelTablePanel extends CommonPanel {
 		try {
 			map = controller.findOrderedHotelAndOrder(user.username);
 		} catch (OrderNotFoundException e) {
-			
-			
+			JOptionPane.showConfirmDialog(null, "未找到预订酒店记录", "提示", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		} 
 		
 		List<HotelVO> hotels = new ArrayList<>();

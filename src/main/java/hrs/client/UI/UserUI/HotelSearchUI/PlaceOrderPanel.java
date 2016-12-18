@@ -363,6 +363,10 @@ public class PlaceOrderPanel extends CommonPanel {
 			JOptionPane.showMessageDialog(null, "人数必须为数字!", "提示", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
+		if(user.credit < 0){
+			JOptionPane.showMessageDialog(null, "信用值不足，请充值！", "提示", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 		int result = JOptionPane.showConfirmDialog(null, "是否确认下单？", "提示", JOptionPane.YES_NO_OPTION);
 		if (result == JOptionPane.YES_OPTION) {
 			controller.addOrder(order);

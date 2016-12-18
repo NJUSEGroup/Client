@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
@@ -124,7 +125,7 @@ public class OrderShowPanel extends CommonPanel {
 		scrollPane.setOpaque(true);
 		table.addMouseListener(new TableListener(this));
 		
-
+		
 		add(scrollPane);
 		
 	}
@@ -159,6 +160,7 @@ public class OrderShowPanel extends CommonPanel {
 		try {
 			return controller.findOrdersByUsernameAndStatus(userVO.username, status);
 		} catch (OrderNotFoundException e) {
+			JOptionPane.showConfirmDialog(null, "未找到相关订单", "提示", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 			List<OrderVO> list = new ArrayList<>();
 			return list;
 			
@@ -230,6 +232,8 @@ public class OrderShowPanel extends CommonPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.remark(orderVO, (int)scoreBox.getSelectedItem(), remarkArea.getText());
+				JOptionPane.showMessageDialog(null, "评价成功！" + "可以随时从订单管理里查看修改您的订单", "提示",
+						JOptionPane.INFORMATION_MESSAGE);
 				dialog.dispose();
 			}
 		});

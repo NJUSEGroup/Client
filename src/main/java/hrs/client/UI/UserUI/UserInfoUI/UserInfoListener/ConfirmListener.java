@@ -43,11 +43,9 @@ public class ConfirmListener implements ActionListener {
 		}
 		else if(result == JOptionPane.YES_OPTION){
 			panel.update();
-			JOptionPane.showConfirmDialog(null,
-					"信息修改成功", "成功", JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE);
 		}
 		else{
-			panel.init();
+			panel.refresh();
 		}
 	}
 

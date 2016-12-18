@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -72,11 +73,8 @@ public class CreditInfoPanel extends CommonPanel {
 		List<CreditRecordVO> list = new ArrayList<>();
 		try {
 			list = controller.findCreditRecordByUsername(this.username);
-			if (list.isEmpty())
-				System.out.println("空");
 		} catch (CreditRecordNotFoundException e) {
-			System.out.println("搜索信用记录发生错误");
-			e.printStackTrace();
+			JOptionPane.showConfirmDialog(null, "未找到信用记录", "提示", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		}
 		return list;
 	}

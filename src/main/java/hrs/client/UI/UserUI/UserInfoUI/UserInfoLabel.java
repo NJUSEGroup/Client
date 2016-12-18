@@ -8,7 +8,11 @@ import javax.swing.JLabel;
 import hrs.client.util.UIConstants;
 
 public class UserInfoLabel extends JLabel {
-	Font font = UIConstants.JZONE_FONT;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6584384605641975423L;
+	Font font = UIConstants.JLABEL_FONT;
 	public UserInfoLabel(String s){
 		setFont(font);
 		

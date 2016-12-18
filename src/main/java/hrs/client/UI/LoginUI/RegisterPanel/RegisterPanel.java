@@ -18,6 +18,7 @@ import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
 import hrs.client.util.HMSBlueButton;
 import hrs.client.util.HMSGrayButton;
+import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.LoginController.ILoginController;
 import hrs.common.Exception.UserService.UserExistedException;
@@ -170,13 +171,7 @@ public class RegisterPanel extends JPanel {
 		
 	}
 	public void cancel() {
-		phoneField.setText("");
-		usernameField.setText("");
-		confirmpassField.setText("");
-		passwordField.setText("");
-		usernameField.setText("");
-		nameField.setText("");
-		enterpriseField.setText("");
+		frame.showLogin();
 	}
 	
 	public void register() {
@@ -184,6 +179,14 @@ public class RegisterPanel extends JPanel {
 		String confirmpass = new String(confirmpassField.getPassword());
 		if(!password.equals(confirmpass)){
 			JOptionPane.showMessageDialog(null, "两次密码输入不一致!", "提示", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		if(!RegExpHelper.matchUsernameAndPWD(password)||!RegExpHelper.matchUsernameAndPWD(usernameField.getText())){
+			JOptionPane.showMessageDialog(null, "密码和用户名必须在6位以上!", "提示", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		if(!RegExpHelper.matchOnlyNum(phoneField.getText())){
+			JOptionPane.showMessageDialog(null, "联系方式必须为数字!", "提示", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
 		

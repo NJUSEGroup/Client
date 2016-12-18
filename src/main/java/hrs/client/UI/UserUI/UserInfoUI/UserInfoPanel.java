@@ -8,6 +8,7 @@ import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import hrs.client.UI.UserUI.UserFrame;
@@ -17,6 +18,7 @@ import hrs.client.UI.UserUI.UserInfoUI.UserInfoListener.ConfirmListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
 import hrs.client.util.HMSBlueButton;
+import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.UserController.IUserController;
 import hrs.common.Exception.UserService.UserNotFoundException;
@@ -40,6 +42,7 @@ public class UserInfoPanel extends CommonPanel {
 	private JTextField nameTextField;// 真实姓名
 	private JTextField contactTextField;// 联系方式
 	private JTextField enterpriseField;// 企业
+	private JTextField passwordField;
 	private JLabel vipLv;
 	private JLabel creditJL;
 
@@ -62,15 +65,13 @@ public class UserInfoPanel extends CommonPanel {
 	Font font = UIConstants.JLABEL_FONT;
 
 	public UserInfoPanel(UserVO user) {
-		// setFont(font);
+		
 		this.user = user;
 
 		// 初始化
 		init();
 
-		// setLayout(null);
-		// setBackground(new Color(211, 237, 249));
-		// setSize(1043, 688);
+		
 
 	}
 
@@ -79,8 +80,6 @@ public class UserInfoPanel extends CommonPanel {
 	}
 	@Override
 	public void init() {
-		creditJL = new JLabel();
-		vipLv = new JLabel();
 		userLabel = new UserInfoLabel("用户名");
 		nameLabel = new UserInfoLabel("真实姓名");
 		birthLabel = new UserInfoLabel("生日");
@@ -92,20 +91,25 @@ public class UserInfoPanel extends CommonPanel {
 		nameTextField = new UserInfoText();// 真实姓名
 		contactTextField = new UserInfoText();// 联系方式
 		enterpriseField = new UserInfoText();// 企业
+		passwordField = new UserInfoText();//密码
 
 		userTextField.setBounds(TEXT_X, COMP_HEIGHT + 10, 180, TEXT_HEIGHT);
 		nameTextField.setBounds(TEXT_X, COMP_HEIGHT * 2 + 10, 180, TEXT_HEIGHT);
 		contactTextField.setBounds(TEXT_X, COMP_HEIGHT * 4 + 10, 180, TEXT_HEIGHT);
 		enterpriseField.setBounds(TEXT_X, COMP_HEIGHT * 5 + 10, 180, TEXT_HEIGHT);
-		creditJL.setBounds(TEXT_X, COMP_HEIGHT * 6, 100, COMP_HEIGHT);
-		vipLv.setBounds(TEXT_X, COMP_HEIGHT * 7, 100, COMP_HEIGHT);
+		passwordField.setBounds(TEXT_X, COMP_HEIGHT * 8+ 10, 160, TEXT_HEIGHT);
 
 		// yearBox = new JComboBox<>();
 		// monthBox = new JComboBox<>();
 		// dayBox = new JComboBox<>();
 		dateChoosePanel = new DateChoosePanel();
 		dateChoosePanel.changeTobirth();
-		dateChoosePanel.setDate(user.birthDate);
+		if(user.birthDate == null){
+			dateChoosePanel.setDateEmpty();
+		}
+		else{
+			dateChoosePanel.setDate(user.birthDate);
+		}
 		dateChoosePanel.setBounds(TEXT_X, COMP_HEIGHT * 3 + 10 + 5, 260, 30);
 
 		add(dateChoosePanel);
@@ -113,8 +117,7 @@ public class UserInfoPanel extends CommonPanel {
 		add(nameTextField);
 		add(contactTextField);
 		add(enterpriseField);
-		add(creditJL);
-		add(vipLv);
+		add(passwordField);
 		// 从数据库获得用户信息
 		getInfo();
 
@@ -148,7 +151,8 @@ public class UserInfoPanel extends CommonPanel {
 		contactTextField.setText(user.phone);
 		enterpriseField.setText(user.enterprise);
 		creditJL = new JLabel("" + user.credit);
-		vipLv = new UserInfoLabel("" + user.credit);
+		vipLv = new JLabel("" + user.VIPLevel);
+		passwordField.setText(user.password);
 		
 		enterpriseField.setEnabled(false);
 		creditJL.setFont(font);
@@ -156,6 +160,14 @@ public class UserInfoPanel extends CommonPanel {
 
 		vipLv.setFont(font);
 		vipLv.setPreferredSize(new Dimension(100, 60));
+		
+		JLabel messageJL = new UserInfoLabel("(密码长度应在六位以上)");
+		messageJL.setBounds(TEXT_X-30, COMP_HEIGHT * 9+ 10, 250, TEXT_HEIGHT);
+		add(messageJL);
+		add(creditJL);
+		add(vipLv);
+		creditJL.setBounds(TEXT_X, COMP_HEIGHT * 6, 100, COMP_HEIGHT);
+		vipLv.setBounds(TEXT_X, COMP_HEIGHT * 7, 100, COMP_HEIGHT);
 
 	}
 
@@ -170,6 +182,8 @@ public class UserInfoPanel extends CommonPanel {
 		contactLabel.setBounds(GAP_WIDTH, COMP_HEIGHT * 4, 100, COMP_HEIGHT);
 		enterpriseLabel.setBounds(GAP_WIDTH, COMP_HEIGHT * 5, 100, COMP_HEIGHT);
 		creditLabel.setBounds(GAP_WIDTH, COMP_HEIGHT * 6, 100, COMP_HEIGHT);
+		UserInfoLabel passwordJL = new UserInfoLabel("密码");
+		passwordJL.setBounds(GAP_WIDTH, COMP_HEIGHT * 8, 100, COMP_HEIGHT);
 
 		JLabel vipLvJL = new UserInfoLabel("会员等级");
 		vipLvJL.setBounds(GAP_WIDTH, COMP_HEIGHT * 7, 100, COMP_HEIGHT);
@@ -181,6 +195,7 @@ public class UserInfoPanel extends CommonPanel {
 		this.add(enterpriseLabel);
 		this.add(creditLabel);
 		this.add(vipLvJL);
+		this.add(passwordJL);
 	}
 
 	public String getUsername() {
@@ -208,8 +223,17 @@ public class UserInfoPanel extends CommonPanel {
 		user.enterprise = getEnterprise();
 		user.name = getRealName();
 		user.phone = getPhone();
-
+		
+		String password = passwordField.getText();
+		if(!RegExpHelper.matchUsernameAndPWD(password)){
+			JOptionPane.showConfirmDialog(null, "密码需在6位以上", "提示", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			refresh();
+			return;
+		}
+		user.password = password;
 		controller.updateUser(user);
+		JOptionPane.showConfirmDialog(null,
+				"信息修改成功", "成功", JOptionPane.PLAIN_MESSAGE,JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void refresh() {

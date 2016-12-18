@@ -181,6 +181,19 @@ public class DateChoosePanel extends JPanel {
 		monthBox.setSelectedItem(Integer.valueOf(time[1]));
 		dayBox.setSelectedItem(Integer.valueOf(time[2]));
 	}
+	
+	public void setDateEmpty() {
+		
+
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.setTime(date);
+//		yearBox.setSelectedItem(calendar.get(Calendar.YEAR));
+//		monthBox.setSelectedItem(calendar.get(Calendar.MONTH)+1);
+//		dayBox.setSelectedItem(calendar.get(Calendar.DATE));
+		yearBox.setSelectedIndex(-1);;
+		monthBox.setSelectedIndex(-1);
+		dayBox.setSelectedIndex(-1);
+	}
 
 	/**
 	 * 设置为不可用

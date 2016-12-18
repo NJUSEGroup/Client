@@ -87,12 +87,10 @@ public class LoginFrame extends JFrame {
 		cardLayout = new CardLayout();
 		contentPane = new JPanel();
 		contentPane.setLayout(cardLayout);
-
-		loginPanel = new LoginPanel(this);
-		registerPanel = new RegisterPanel(this);
-		contentPane.add("login", loginPanel);
-		contentPane.add("register", registerPanel);
-		cardLayout.show(contentPane, "login");
+		
+		
+		
+		showLogin();
 		
 		
 		contentPane.setBounds(PANEL_X, 100, PANEL_W, HEIGHT - 170);
@@ -103,7 +101,7 @@ public class LoginFrame extends JFrame {
 		
 
 	}
-
+	
 	private void setLabel() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(null);
@@ -121,10 +119,14 @@ public class LoginFrame extends JFrame {
 	}
 
 	public void showRegister() {
+		registerPanel = new RegisterPanel(this);
+		contentPane.add("register", registerPanel);
 		cardLayout.show(contentPane, "register");
 	}
 
 	public void showLogin() {
+		loginPanel = new LoginPanel(this);
+		contentPane.add("login", loginPanel);
 		cardLayout.show(contentPane, "login");
 	}
 
