@@ -313,6 +313,7 @@ public class HotelFrame extends JFrame {
 		else if(label.equals("促销策略")){
 			cardNum = 3;
 			card.show(jpCard, "HotelDiscountUI");
+			jpHotelDiscountUI.refresh();
 			jlHotelInfo.setBackground(labelColor);
 			jlHotelInfo.setForeground(Color.WHITE);
 			jlHotelOrder.setBackground(labelColor);

@@ -40,6 +40,9 @@ public class OfflineRecordUIPanel extends JPanel {
 	private JPanel jpButton;
 	private JScrollPane jspRecord;
 	private JLabel jlInput;
+	private JLabel jlTotal;
+	private JLabel jlNum;
+	private JLabel jlRecord;
 	private JTextField jtfInput;
 	private HMSBlueButton jbConfirm;
 	private JTable jtRecord;
@@ -175,6 +178,20 @@ public class OfflineRecordUIPanel extends JPanel {
 	 * 设置按钮面板
 	 */
 	public void setButtonPanel(){
+		jlTotal = new JLabel();
+		jlTotal.setBounds(15, 15, 35, 20);
+		jlTotal.setFont(tableFont);
+		jlTotal.setText("共有");
+		
+		jlNum = new JLabel();
+		jlNum.setBounds(50, 15, 25, 20);
+		jlNum.setFont(tableFont);
+		
+		jlRecord = new JLabel();
+		jlRecord.setBounds(80, 15, 50, 20);
+		jlRecord.setFont(tableFont);
+		jlRecord.setText("条记录");
+		
 		checkinListener = new CheckinListener(this);
 		
 		jbCheckin = new HMSBlueButton("入住");
@@ -190,6 +207,9 @@ public class OfflineRecordUIPanel extends JPanel {
 		
 		jpButton.add(jbCheckin);
 		jpButton.add(jbCheckout);
+		jpButton.add(jlTotal);
+		jpButton.add(jlNum);
+		jpButton.add(jlRecord);
 	}
 	
 	/**
@@ -244,6 +264,7 @@ public class OfflineRecordUIPanel extends JPanel {
 	public void refresh(List<OfflineRecordVO> record){
 		model = new OfflineRecordTableModel(record);
 		jtRecord.setModel(model);
+		jlNum.setText(Integer.toString(record.size()));
 	}
 	
 	/**

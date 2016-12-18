@@ -47,6 +47,9 @@ public class HotelOrderUIPanel extends JPanel {
 	private JScrollPane jspOrderList;
 	private JLabel jlOrderType;
 	private JLabel jlSearch;
+	private JLabel jlTotal;
+	private JLabel jlRecord;
+	private JLabel jlNum;
 	private JComboBox<String> jcbOrderType;
 	private JComboBox<String> jcbSearch;
 	private JTextField jtfSearch;
@@ -221,6 +224,20 @@ public class HotelOrderUIPanel extends JPanel {
 	 * 设置按钮面板
 	 */
 	public void setButtonPanel(){
+		jlTotal = new JLabel();
+		jlTotal.setBounds(15, 15, 35, 20);
+		jlTotal.setFont(tableFont);
+		jlTotal.setText("共有");
+		
+		jlNum = new JLabel();
+		jlNum.setBounds(50, 15, 25, 20);
+		jlNum.setFont(tableFont);
+		
+		jlRecord = new JLabel();
+		jlRecord.setBounds(80, 15, 50, 20);
+		jlRecord.setFont(tableFont);
+		jlRecord.setText("条记录");
+		
 		jbDetail = new HMSBlueButton("查看详细");
 		jbDetail.setBounds(410, 13, 110, 40);
 		jbDetail.addMouseListener(detailListener);
@@ -251,6 +268,9 @@ public class HotelOrderUIPanel extends JPanel {
 		jpButton.add(jbCheckin);
 		jpButton.add(jbCheckout);
 		jpButton.add(jbDelay);
+		jpButton.add(jlTotal);
+		jpButton.add(jlNum);
+		jpButton.add(jlRecord);
 	}
 	
 	/**
@@ -277,6 +297,7 @@ public class HotelOrderUIPanel extends JPanel {
 	public void refreshOrderList(List<OrderVO> orderList){
 		orderListTableModel = new OrderListTableModel(orderList);
 		jtOrderList.setModel(orderListTableModel);
+		jlNum.setText(Integer.toString(orderList.size()));
 	}
 	
 	/**

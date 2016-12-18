@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -41,6 +42,9 @@ public class RoomUIPanel extends JPanel {
 	private RoomTableModel roomTableModel;
 	private HMSBlueButton jbAdd;
 	private HMSBlueButton jbEdit;
+	private JLabel jlTotal;
+	private JLabel jlNum;
+	private JLabel jlRecord;
 	private HotelVO theHotel;
 	private IRoomController roomController;
 	private AddListener addListener;
@@ -140,6 +144,20 @@ public class RoomUIPanel extends JPanel {
 	 * 设置按钮面板
 	 */
 	public void setButtonPanel(){
+		jlTotal = new JLabel();
+		jlTotal.setBounds(15, 15, 35, 20);
+		jlTotal.setFont(font);
+		jlTotal.setText("共有");
+		
+		jlNum = new JLabel();
+		jlNum.setBounds(50, 15, 25, 20);
+		jlNum.setFont(font);
+		
+		jlRecord = new JLabel();
+		jlRecord.setBounds(80, 15, 50, 20);
+		jlRecord.setFont(font);
+		jlRecord.setText("条记录");
+		
 		addListener = new AddListener(this);
 		
 		jbAdd = new HMSBlueButton("添加");
@@ -155,6 +173,9 @@ public class RoomUIPanel extends JPanel {
 		
 		jpButton.add(jbAdd);
 		jpButton.add(jbEdit);
+		jpButton.add(jlTotal);
+		jpButton.add(jlNum);
+		jpButton.add(jlRecord);
 	}
 	
 	/**
@@ -211,10 +232,11 @@ public class RoomUIPanel extends JPanel {
 			rooms= roomController.findByHotelID(theHotel.id);
 		} catch (RoomNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "您的酒店尚未录入客房！", "提示", JOptionPane.INFORMATION_MESSAGE);
 		}
 		roomTableModel = new RoomTableModel(rooms);
 		jtRoom.setModel(roomTableModel);
+		jlNum.setText(Integer.toString(rooms.size()));
 	}
 	
 	/**
