@@ -5,6 +5,8 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import hrs.client.UI.HotelUI.HotelOrderUI.HotelOrderUIPanel;
 import hrs.common.VO.OrderVO;
 
@@ -23,13 +25,16 @@ public class CheckoutListener implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if(jpHotelOrder.isButtonEnable("退房")){
-			int row = jpHotelOrder.getSelectedRow();
-			OrderVO order = jpHotelOrder.getSelectedOrder(row);
-			jpHotelOrder.checkout(order);
-			order = jpHotelOrder.getSelectedOrder(row);
-			List<OrderVO> orders = new ArrayList<OrderVO>();
-			orders.add(order);
-			jpHotelOrder.refreshOrderList(orders);
+			int value = JOptionPane.showConfirmDialog(null, "您确定要对该订单执行退房操作吗？", "请确认退房", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if(value==JOptionPane.OK_OPTION){
+				int row = jpHotelOrder.getSelectedRow();
+				OrderVO order = jpHotelOrder.getSelectedOrder(row);
+				jpHotelOrder.checkout(order);
+				order = jpHotelOrder.getSelectedOrder(row);
+				List<OrderVO> orders = new ArrayList<OrderVO>();
+				orders.add(order);
+				jpHotelOrder.refreshOrderList(orders);
+			}
 		}
 	}
 

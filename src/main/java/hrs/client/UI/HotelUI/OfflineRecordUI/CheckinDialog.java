@@ -15,6 +15,8 @@ import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckinCancelListener;
 import hrs.client.UI.HotelUI.OfflineRecordUI.Listener.CheckinConfirmListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
+import hrs.client.util.HMSBlueButton;
+import hrs.client.util.HMSGrayButton;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.HotelController.IOfflineRecordController;
 import hrs.common.VO.HotelVO;
@@ -40,9 +42,9 @@ public class CheckinDialog extends JDialog {
 	private JLabel jlExpectedCheckoutTime;
 	private JLabel jlRoomType;
 	private JLabel jlRoomNum;
-	private JButton jbConfirm;
-	private JButton jbCancel;
-	private JButton jbCheckRoom;
+	private HMSBlueButton jbConfirm;
+	private HMSGrayButton jbCancel;
+	private HMSBlueButton jbCheckRoom;
 	private JComboBox<String> jcbRoomType;
 	private JComboBox<String> jcbRoomNum;
 	private IOfflineRecordController recordController;
@@ -55,6 +57,7 @@ public class CheckinDialog extends JDialog {
 	private CheckinCancelListener cancelListener;
 	private List<RoomVO> rooms;
 	private OfflineRecordUIPanel jpRecord;
+	private Font font;
 
 	/**
 	 * 初始化线下记录入住对话框
@@ -69,6 +72,7 @@ public class CheckinDialog extends JDialog {
 		contentPanel.setLayout(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		font = UIConstants.FONT_17;
 		
 		this.setPanel();
 		this.setDatePanel();
@@ -88,17 +92,17 @@ public class CheckinDialog extends JDialog {
 	 */
 	public void setPanel(){
 		jpDate = new JPanel();
-		jpDate.setBounds(0, 0, 513, 201);
+		jpDate.setBounds(0, 0, 525, 201);
 		jpDate.setLayout(null);
 		jpDate.setBackground(UIConstants.JFRAME);
 		
 		jpRoom = new JPanel();
-		jpRoom.setBounds(0, 200, 513, 170);
+		jpRoom.setBounds(0, 200, 525, 170);
 		jpRoom.setLayout(null);
 		jpRoom.setBackground(UIConstants.JFRAME);
 		
 		jpButton = new JPanel();
-		jpButton.setBounds(0, 369, 513, 69);
+		jpButton.setBounds(0, 369, 525, 81);
 		jpButton.setLayout(null);
 		jpButton.setBackground(UIConstants.JFRAME);
 		
@@ -113,29 +117,29 @@ public class CheckinDialog extends JDialog {
 	public void setDatePanel(){
 		checkRoomTypeListener = new CheckRoomTypeListener(this);
 		
-		jbCheckRoom = new JButton();
-		jbCheckRoom.setForeground(Color.WHITE);
-		jbCheckRoom.setFont(new Font("宋体", Font.PLAIN, 17));
-		jbCheckRoom.setBounds(169, 146, 148, 42);
+		jbCheckRoom = new HMSBlueButton();
+		jbCheckRoom.setFont(font);
+		jbCheckRoom.setBounds(150, 146, 148, 42);
 		jbCheckRoom.setText("查看可用房间");
 		jbCheckRoom.setBackground(UIConstants.JBUTTON_BLUE);
 		jbCheckRoom.addMouseListener(checkRoomTypeListener);
 		
 		jlCheckinTime = new JLabel();
-		jlCheckinTime.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlCheckinTime.setFont(font);
 		jlCheckinTime.setText("入住时间");
-		jlCheckinTime.setBounds(15, 13, 114, 40);
+		jlCheckinTime.setBounds(20, 20, 105, 30);
 		
 		jlExpectedCheckoutTime = new JLabel();
-		jlExpectedCheckoutTime.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlExpectedCheckoutTime.setFont(font);
 		jlExpectedCheckoutTime.setText("预计离开时间");
-		jlExpectedCheckoutTime.setBounds(15, 78, 135, 40);
+		jlExpectedCheckoutTime.setBounds(15, 80, 105, 30);
 		
 		dcpCheckin = new DateChoosePanel();
-		dcpCheckin.setBounds(169, 13, 330, 40);
+		dcpCheckin.yearBox.setSize(70, 20);
+		dcpCheckin.setBounds(150, 20, 260, 30);
 		
 		dcpCheckout = new DateChoosePanel();
-		dcpCheckout.setBounds(169, 78, 330, 40);
+		dcpCheckout.setBounds(150, 80, 260, 30);
 		
 		jpDate.add(jlCheckinTime);
 		jpDate.add(jlExpectedCheckoutTime);
@@ -149,25 +153,25 @@ public class CheckinDialog extends JDialog {
 	 */
 	public void setRoomPanel(){
 		jlRoomType = new JLabel();
-		jlRoomType.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlRoomType.setFont(font);
 		jlRoomType.setText("房间类型");
-		jlRoomType.setBounds(15, 24, 100, 40);
+		jlRoomType.setBounds(20, 30, 105, 30);
 		
 		jlRoomNum = new JLabel();
-		jlRoomNum.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlRoomNum.setFont(font);
 		jlRoomNum.setText("房间数量");
-		jlRoomNum.setBounds(15, 97, 100, 40);
+		jlRoomNum.setBounds(20, 90, 105, 30);
 		
 		checkRoomNumListener = new CheckRoomNumListener(this);
 		
 		jcbRoomType = new JComboBox<String>();
-		jcbRoomType.setFont(new Font("宋体", Font.PLAIN, 18));
-		jcbRoomType.setBounds(169, 25, 200, 40);
+		jcbRoomType.setFont(font);
+		jcbRoomType.setBounds(150, 30, 200, 30);
 		jcbRoomType.addItemListener(checkRoomNumListener);
 		
 		jcbRoomNum = new JComboBox<String>();
-		jcbRoomNum.setFont(new Font("宋体", Font.PLAIN, 18));
-		jcbRoomNum.setBounds(169, 100, 200, 40);
+		jcbRoomNum.setFont(font);
+		jcbRoomNum.setBounds(150, 90, 200, 30);
 		
 		jpRoom.add(jlRoomType);
 		jpRoom.add(jlRoomNum);
@@ -178,7 +182,7 @@ public class CheckinDialog extends JDialog {
 	public void setButtonPanel(){
 		confirmListener = new CheckinConfirmListener(this);
 		
-		jbConfirm = new JButton();
+		jbConfirm = new HMSBlueButton();
 		jbConfirm.setFont(new Font("宋体", Font.PLAIN, 16));
 		jbConfirm.setText("确定");
 		jbConfirm.setBounds(123, 13, 70, 40);
@@ -186,7 +190,7 @@ public class CheckinDialog extends JDialog {
 		
 		cancelListener = new CheckinCancelListener(this);
 		
-		jbCancel = new JButton();
+		jbCancel = new HMSGrayButton();
 		jbCancel.setFont(new Font("宋体", Font.PLAIN, 16));
 		jbCancel.setText("取消");
 		jbCancel.setBounds(323, 13, 70, 40);
@@ -202,36 +206,40 @@ public class CheckinDialog extends JDialog {
 	public void checkRoomType(){
 		Date checkin = dcpCheckin.getDate();
 		Date checkout = dcpCheckout.getDate();
+		if(checkout.before(checkin)){
+			JOptionPane.showMessageDialog(null, "入住时间应早于预计时间！", "错误", JOptionPane.ERROR_MESSAGE);
+		}
+		else{
+			rooms = recordController.findAvailableByHotelID(hotel.id, checkin, checkout);
 		
-		rooms = recordController.findAvailableByHotelID(hotel.id, checkin, checkout);
-		
-		for(int i=0;i<rooms.size();i++){
-			String roomType = rooms.get(i).type.toString();
-			String type = "";
+			for(int i=0;i<rooms.size();i++){
+				String roomType = rooms.get(i).type.toString();
+				String type = "";
+				
+				if(roomType.equals("Single")){
+					type = "单人房";
+				}
+				else if(roomType.equals("Double")){
+					type = "双人房";
+				}
+				else if(roomType.equals("KingSize")){
+					type = "大床间";
+				}
+				else if(roomType.equals("Standard")){
+					type = "标准间";
+				}
+				else if(roomType.equals("Deluxe")){
+					type = "豪华间";
+				}
+				else if(roomType.equals("Business")){
+					type = "商务标间";
+				}
+				else{
+					type = "行政标间";
+				}
 			
-			if(roomType.equals("Single")){
-				type = "单人房";
+				jcbRoomType.addItem(type);
 			}
-			else if(roomType.equals("Double")){
-				type = "双人房";
-			}
-			else if(roomType.equals("KingSize")){
-				type = "大床间";
-			}
-			else if(roomType.equals("Standard")){
-				type = "标准间";
-			}
-			else if(roomType.equals("Deluxe")){
-				type = "豪华间";
-			}
-			else if(roomType.equals("Business")){
-				type = "商务标间";
-			}
-			else{
-				type = "行政标间";
-			}
-			
-			jcbRoomType.addItem(type);
 		}
 	}
 	
@@ -252,21 +260,28 @@ public class CheckinDialog extends JDialog {
 	 * 确认执行入住操作
 	 */
 	public void checkinConfirm(){
-		OfflineRecordVO newRecord = new OfflineRecordVO();
+		Date checkin = dcpCheckin.getDate();
+		Date checkout = dcpCheckout.getDate();
+		if(checkout.before(checkin)){
+			JOptionPane.showMessageDialog(null, "入住时间应早于预计时间！", "错误", JOptionPane.ERROR_MESSAGE);
+		}
+		else{
+			OfflineRecordVO newRecord = new OfflineRecordVO();
 		
-		newRecord.hotel = hotel;
-		newRecord.checkinTime = dcpCheckin.getDate();
-		newRecord.expectedCheckoutTime = dcpCheckout.getDate();
-		int typeIndex =  jcbRoomType.getSelectedIndex();
-		newRecord.type = rooms.get(typeIndex).type;
-		newRecord.num = Integer.valueOf((String) jcbRoomNum.getSelectedItem());
+			newRecord.hotel = hotel;
+			newRecord.checkinTime = checkin;
+			newRecord.expectedCheckoutTime = checkout;
+			int typeIndex =  jcbRoomType.getSelectedIndex();
+			newRecord.type = rooms.get(typeIndex).type;
+			newRecord.num = Integer.valueOf((String) jcbRoomNum.getSelectedItem());
 		
-		recordController.offlineCheckin(newRecord);
-		jpRecord.refresh(jpRecord.getAllRecords());
+			recordController.offlineCheckin(newRecord);
+			jpRecord.refresh(jpRecord.getAllRecords());
 		
-		this.dispose();
+			this.dispose();
 		
-		JOptionPane.showMessageDialog(null, "线下入住记录已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "线下入住记录已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
 	/**
@@ -277,3 +292,4 @@ public class CheckinDialog extends JDialog {
 	}
 	
 }
+

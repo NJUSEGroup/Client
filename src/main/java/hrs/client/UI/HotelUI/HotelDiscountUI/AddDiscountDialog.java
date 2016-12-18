@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -63,6 +62,8 @@ public class AddDiscountDialog extends JDialog {
 	private HotelVO hotel;
 	private List<EnterpriseVO> allFirms;
 	private HotelDiscountUIPanel jpDiscountUI;
+	private Font font;
+	private JLabel jlZero;
 	/**
 	 * Create the dialog.
 	 */
@@ -76,78 +77,83 @@ public class AddDiscountDialog extends JDialog {
 		contentPanel.setLayout(null);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		font = UIConstants.FONT_17;
 		
 		jpDiscount = new JPanel();
-		jpDiscount.setBounds(0, 0, 552, 380);
+		jpDiscount.setBounds(0, 0, 564, 380);
 		jpDiscount.setLayout(null);
 		jpDiscount.setBackground(UIConstants.JFRAME);
 		
 		jpButton = new JPanel();
-		jpButton.setBounds(0, 377, 552, 61);
+		jpButton.setBounds(0, 377, 564, 73);
 		jpButton.setLayout(null);
 		jpButton.setBackground(UIConstants.JFRAME);
 		
 		jlType = new JLabel();
-		jlType.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlType.setFont(font);
 		jlType.setText("折扣类型");
-		jlType.setBounds(10, 10, 100, 40);
+		jlType.setBounds(30, 30, 75, 30);
 		
 		jlBegin = new JLabel();
-		jlBegin.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlBegin.setFont(font);
 		jlBegin.setText("开始时间");
-		jlBegin.setBounds(10, 70, 100, 40);
+		jlBegin.setBounds(30, 90, 75, 30);
 		
 		jlEnd = new JLabel();
-		jlEnd.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlEnd.setFont(font);
 		jlEnd.setText("结束时间");
-		jlEnd.setBounds(10, 130, 100, 40);
+		jlEnd.setBounds(30, 150, 75, 30);
 		
 		jlRoomNum = new JLabel();
-		jlRoomNum.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlRoomNum.setFont(font);
 		jlRoomNum.setText("最小房间预订数量");
-		jlRoomNum.setBounds(10, 190, 170, 40);
+		jlRoomNum.setBounds(30, 210, 170, 30);
 		
 		jlFirm = new JLabel();
-		jlFirm.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlFirm.setFont(font);
 		jlFirm.setText("合作企业");
-		jlFirm.setBounds(10, 250, 100, 40);
+		jlFirm.setBounds(30, 270, 75, 30);
 		
 		jlDiscount = new JLabel();
-		jlDiscount.setFont(new Font("宋体", Font.PLAIN, 21));
+		jlDiscount.setFont(font);
 		jlDiscount.setText("折扣信息");
-		jlDiscount.setBounds(10, 310, 100, 40);
+		jlDiscount.setBounds(30, 330, 75, 30);
+		
+		jlZero = new JLabel("0.");
+		jlZero.setBounds(200, 330, 75, 30);
+		jlZero.setFont(font);
 		
 		typeSelectedListener = new TypeSelectedListener(this);
 		
 		jcbType = new JComboBox<String>();
-		jcbType.setBounds(200, 10, 330, 40);
+		jcbType.setBounds(200, 30, 330, 30);
 		this.getAllTypes();
 		jcbType.addItemListener(typeSelectedListener);
-		jcbType.setFont(new Font("宋体", Font.PLAIN, 21));
+		jcbType.setFont(font);
 		
 		dcpBegin = new DateChoosePanel();
-		dcpBegin.setBounds(200, 70, 330, 40);
+		dcpBegin.setBounds(200, 90, 330, 30);
 		dcpBegin.setUnusable();
 		
 		dcpEnd = new DateChoosePanel();
-		dcpEnd.setBounds(200, 130, 330, 40);
+		dcpEnd.setBounds(200, 150, 330, 30);
 		dcpEnd.setUnusable();
 		
 		jsRoomNum = new JSpinner();
-		jsRoomNum.setBounds(200, 190, 100, 40);
+		jsRoomNum.setBounds(200, 210, 100, 30);
 		jsRoomNum.setModel(new SpinnerNumberModel());
 		jsRoomNum.setEnabled(false);
-		jsRoomNum.setFont(new Font("宋体", Font.PLAIN, 21));
+		jsRoomNum.setFont(font);
 		
 		jcbFirm = new JComboBox<String>();
-		jcbFirm.setBounds(200, 250, 330, 40);
+		jcbFirm.setBounds(200, 270, 330, 30);
 		jcbFirm.setEnabled(false);
-		jcbFirm.setFont(new Font("宋体", Font.PLAIN, 21));
+		jcbFirm.setFont(font);
 		
 		jtfDiscount = new JTextField();
-		jtfDiscount.setBounds(200, 310, 330, 40);
+		jtfDiscount.setBounds(221, 330, 86, 30);
 		jtfDiscount.setEnabled(true);
-		jtfDiscount.setFont(new Font("宋体", Font.PLAIN, 21));
+		jtfDiscount.setFont(font);
 		
 		addListener = new AddConfirmListener(this);
 		
@@ -175,11 +181,13 @@ public class AddDiscountDialog extends JDialog {
 		jpDiscount.add(jsRoomNum);
 		jpDiscount.add(jcbFirm);
 		jpDiscount.add(jtfDiscount);
+		jpDiscount.add(jlZero);
 		
 		jpButton.add(jbConfirm);
 		jpButton.add(jbCancel);
 		
 		contentPanel.add(jpDiscount);
+
 		contentPanel.add(jpButton);
 		
 		controller = ControllerFactory.getHotelDiscountController();
@@ -264,82 +272,63 @@ public class AddDiscountDialog extends JDialog {
 	 */
 	public void add(){
 		String sdiscount = jtfDiscount.getText();
-		double discount = Double.valueOf(sdiscount);
-		int roomNum = ((Integer) jsRoomNum.getValue()).intValue();
-		if(discount<0){
-			JOptionPane.showMessageDialog(null, "折扣信息不能小于0！", "错误", JOptionPane.WARNING_MESSAGE);
+		if(!RegExpHelper.matchOnlyNum(sdiscount)){
+			JOptionPane.showMessageDialog(null, "折扣信息中不能包含非数字字符！", "错误", JOptionPane.WARNING_MESSAGE);
 		}
-		else if(discount==0.0){
-			JOptionPane.showMessageDialog(null, "折扣信息不能为0！", "错误", JOptionPane.WARNING_MESSAGE);
-		}
-		else if(discount>=1.0){
-			JOptionPane.showMessageDialog(null, "折扣信息不能大于等于1！", "错误", JOptionPane.WARNING_MESSAGE);
+		else if(sdiscount.length()>2){
+			JOptionPane.showMessageDialog(null, "折扣信息中只能包含一位或两位有效数字！", "错误", JOptionPane.WARNING_MESSAGE);
 		}
 		else{
-			String type = (String) jcbType.getSelectedItem();
-			HotelDiscountVO newDiscount = new HotelDiscountVO();
-			newDiscount.hotel = hotel;
-		
-			if(type.equals("生日特惠折扣")){
-				newDiscount.type = HotelDiscountType.Birthday;
-				newDiscount.discount = discount;
-				
-				controller.add(newDiscount);
-				
-				jpDiscountUI.getAllDiscounts();
-				jpDiscountUI.refresh();
-				
-				this.dispose();
-				
-				JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);	
+			double discount = Double.valueOf(sdiscount);
+			int roomNum = ((Integer) jsRoomNum.getValue()).intValue();
+			if((discount==0)){
+				JOptionPane.showMessageDialog(null, "折扣信息不能为0！", "错误", JOptionPane.WARNING_MESSAGE);
 			}
-			else if(type.equals("房间预订特惠")){
-				if(roomNum<0){
-					JOptionPane.showMessageDialog(null, "房间数量不能小于0！", "错误", JOptionPane.WARNING_MESSAGE);
-				}
-				else if(roomNum==0){
-					JOptionPane.showMessageDialog(null, "房间数量不能为0！", "错误", JOptionPane.WARNING_MESSAGE);
-				}
-				else{
-					newDiscount.type = HotelDiscountType.LargeQty;
-					newDiscount.minQty = roomNum;
+			else{
+				discount = discount / 100;
+				String type = (String) jcbType.getSelectedItem();
+				HotelDiscountVO newDiscount = new HotelDiscountVO();
+				newDiscount.hotel = hotel;
+		
+				if(type.equals("生日特惠折扣")){
+					newDiscount.type = HotelDiscountType.Birthday;
 					newDiscount.discount = discount;
-					
+				
 					controller.add(newDiscount);
-					
+				
 					jpDiscountUI.getAllDiscounts();
 					jpDiscountUI.refresh();
-					
+				
 					this.dispose();
-					
+				
 					JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);	
 				}
-			}
-			else if(type.equals("合作企业客户折扣")){
-				newDiscount.type = HotelDiscountType.Enterprise;
-				int firmIndex = jcbFirm.getSelectedIndex();
-				newDiscount.enterprise = allFirms.get(firmIndex);
-				newDiscount.discount = discount;
-				
-				controller.add(newDiscount);
-				
-				jpDiscountUI.getAllDiscounts();
-				jpDiscountUI.refresh();
-				
-				this.dispose();
-				
-				JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);	
-			}
-			else if(type.equals("特定期间折扣")){
-				Date begin = dcpBegin.getDate();
-				Date end = dcpEnd.getDate();
-				if(end.before(begin)){
-					JOptionPane.showMessageDialog(null, "开始时间应早于结束时间！", "错误", JOptionPane.ERROR_MESSAGE);
+				else if(type.equals("房间预订特惠")){
+					if(roomNum<0){
+						JOptionPane.showMessageDialog(null, "房间数量不能小于0！", "错误", JOptionPane.WARNING_MESSAGE);
+					}
+					else if(roomNum==0){
+						JOptionPane.showMessageDialog(null, "房间数量不能为0！", "错误", JOptionPane.WARNING_MESSAGE);
+					}
+					else{
+						newDiscount.type = HotelDiscountType.LargeQty;
+						newDiscount.minQty = roomNum;
+						newDiscount.discount = discount;
+					
+						controller.add(newDiscount);
+						
+						jpDiscountUI.getAllDiscounts();
+						jpDiscountUI.refresh();
+					
+						this.dispose();
+					
+						JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);	
+					}
 				}
-				else{
-					newDiscount.type = HotelDiscountType.SpecialPeriod;
-					newDiscount.beginTime = begin;
-					newDiscount.endTime = end;
+				else if(type.equals("合作企业客户折扣")){
+					newDiscount.type = HotelDiscountType.Enterprise;
+					int firmIndex = jcbFirm.getSelectedIndex();
+					newDiscount.enterprise = allFirms.get(firmIndex);
 					newDiscount.discount = discount;
 				
 					controller.add(newDiscount);
@@ -349,7 +338,29 @@ public class AddDiscountDialog extends JDialog {
 				
 					this.dispose();
 				
-					JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);	
+				}
+				else if(type.equals("特定期间折扣")){
+					Date begin = dcpBegin.getDate();
+					Date end = dcpEnd.getDate();
+					if(end.before(begin)){
+						JOptionPane.showMessageDialog(null, "开始时间应早于结束时间！", "错误", JOptionPane.ERROR_MESSAGE);
+					}
+					else{
+						newDiscount.type = HotelDiscountType.SpecialPeriod;
+						newDiscount.beginTime = begin;
+						newDiscount.endTime = end;
+						newDiscount.discount = discount;
+				
+						controller.add(newDiscount);
+				
+						jpDiscountUI.getAllDiscounts();
+						jpDiscountUI.refresh();
+					
+						this.dispose();
+				
+						JOptionPane.showMessageDialog(null, "促销策略已更新！", "更新成功", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 			}
 		}
@@ -358,5 +369,4 @@ public class AddDiscountDialog extends JDialog {
 	public void cancel(){
 		this.dispose();
 	}
-	
 }
