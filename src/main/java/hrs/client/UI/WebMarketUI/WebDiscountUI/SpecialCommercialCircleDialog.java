@@ -14,8 +14,8 @@ import javax.swing.border.EmptyBorder;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifySpecialCommercialListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialCommercialListener;
 import hrs.client.util.ControllerFactory;
-import hrs.client.util.DoubleFormat;
 import hrs.client.util.HMSBlueButton;
+import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
 import hrs.common.VO.CommercialCircleVO;
@@ -23,6 +23,7 @@ import hrs.common.VO.LocationVO;
 import hrs.common.VO.WebDiscountVO;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -53,6 +54,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 	private IWebDiscountController controller = ControllerFactory.getWebDiscountController();
 	private ConfirmModifySpecialCommercialListener listener;
 	private CancelModifySpecialCommercialListener cancelListener;
+	private JLabel jlDisc;
 
 	public SpecialCommercialCircleDialog(WebDiscountPanel webDiscountPanel) {
 		this.webDiscountPanel = webDiscountPanel;
@@ -71,7 +73,7 @@ public class SpecialCommercialCircleDialog extends JDialog {
 		this.setResizable(false);
 		this.setModal(true);
 		this.setLocationRelativeTo(null);
-		
+
 		getContentPane().setLayout(null);
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -158,16 +160,36 @@ public class SpecialCommercialCircleDialog extends JDialog {
 
 		jtextDiscount = new JTextField();
 		jtextDiscount.setFont(UIConstants.FONT_17);
-		jtextDiscount.setBounds(195, 144, 130, 26);
+		jtextDiscount.setBounds(213, 141, 112, 26);
 		getContentPane().add(jtextDiscount);
 		jtextDiscount.setColumns(10);
-		jtextDiscount.setText(webDiscountVO.discount + "");
+
+		jlDisc = new JLabel("0.");
+		jlDisc.setBounds(195, 141, 31, 26);
+		jlDisc.setFont(UIConstants.FONT_17);
+		getContentPane().add(jlDisc);
 	}
 
 	public WebDiscountVO getModifyVO() {
 		locations = controller.findAllLocations();
 		int j = 0, k = 0;
-		double newDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
+		double newDiscount = 0;
+
+		if (!RegExpHelper.matchOnlyNum(jtextDiscount.getText())) {
+			JOptionPane.showMessageDialog(null, "折扣信息中不能包含非数字字符！", "Error", JOptionPane.WARNING_MESSAGE);
+		} else if (jtextDiscount.getText().length() > 2) {
+			JOptionPane.showMessageDialog(null, "折扣信息中只能包含一位或两位有效数字！", "Error", JOptionPane.WARNING_MESSAGE);
+		} else if (Integer.valueOf(jtextDiscount.getText()) == 0) {
+			JOptionPane.showMessageDialog(null, "促销策略不为0！", "Error", JOptionPane.WARNING_MESSAGE);
+		} else {
+			if (jtextDiscount.getText().length() == 1) {
+				newDiscount = Double.valueOf(jtextDiscount.getText()) / 10;
+			} else {
+				newDiscount = Double.valueOf(jtextDiscount.getText()) / 100;
+			}
+
+		}
+
 		String newLocation = (String) jcomboBoxLocation.getSelectedItem();
 		String newCommercialCircle = (String) jcomboBoxCommercialCircle.getSelectedItem();
 		for (j = 0; j < locations.size(); j++) {

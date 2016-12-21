@@ -22,13 +22,13 @@ public class ShowUserInfoPanel extends JPanel {
 	private JLabel jlPhone;
 	private JLabel jlEnterpriseName;
 	private JLabel jlCredit;
-	private JTextField jtextPassword;
 	private JTextField jtextRealName;
 	private DateChoosePanel jtextBirthdayShow;
 	private JTextField jtextPhone;
 	private JLabel jlCreditvalue;
 	private JLabel jlUsernameShow;
 	private JLabel jlEnterpriseShow;
+	private JLabel jlPassWord;
 
 	/**
 	 * Create the panel.
@@ -69,11 +69,6 @@ public class ShowUserInfoPanel extends JPanel {
 		jlCredit.setBounds(43, 369, 72, 35);
 		jlCredit.setFont(UIConstants.FONT_18);
 
-		jtextPassword = new JTextField();
-		jtextPassword.setFont(UIConstants.FONT_17);
-		jtextPassword.setBounds(171, 89, 253, 38);
-		jtextPassword.setColumns(10);
-
 		jtextRealName = new JTextField();
 		jtextRealName.setFont(UIConstants.FONT_17);
 		jtextRealName.setBounds(171, 145, 253, 38);
@@ -104,6 +99,10 @@ public class ShowUserInfoPanel extends JPanel {
 		jlCreditvalue.setFont(UIConstants.FONT_19);
 		jlCreditvalue.setBounds(171, 369, 253, 38);
 
+		jlPassWord = new JLabel();
+		jlPassWord.setFont(UIConstants.FONT_21);
+		jlPassWord.setBounds(171, 95, 64, 30);
+
 		setLayout(null);
 
 		add(jlCredit);
@@ -117,17 +116,14 @@ public class ShowUserInfoPanel extends JPanel {
 		add(jlCreditvalue);
 		add(jlEnterpriseShow);
 		add(jtextRealName);
-		add(jtextPassword);
 		add(jtextBirthdayShow);
 		add(jtextPhone);
+		add(jlPassWord);
 	}
 
 	// public String getUsername(){
 	// return .getText();
 	// }
-	public String getPassword() {
-		return jtextPassword.getText();
-	}
 
 	public String getRealName() {
 		// System.out.println(jtextRealName.getText());
@@ -146,7 +142,7 @@ public class ShowUserInfoPanel extends JPanel {
 
 	public void clear() {
 		jlUsernameShow.setText("");
-		jtextPassword.setText("");
+		jlPassWord.setText("");
 		jtextRealName.setText("");
 		jtextPhone.setText("");
 		jlEnterpriseShow.setText("");
@@ -156,8 +152,8 @@ public class ShowUserInfoPanel extends JPanel {
 
 	public void inputInfo(UserVO userVO) {
 		jlUsernameShow.setText(userVO.username);
-		jtextPassword.setText(userVO.password);
-		jtextRealName.setText(userVO.name);	
+		jlPassWord.setText("******");
+		jtextRealName.setText(userVO.name);
 		jtextPhone.setText(userVO.phone);
 		jlEnterpriseShow.setText(userVO.enterprise);
 		jlCreditvalue.setText(userVO.credit + "");

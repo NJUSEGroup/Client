@@ -138,7 +138,11 @@ public class WebDiscountPanel extends JPanel {
 
 	public void addWebDiscount() {
 		addVo = jdAddWebDiscount.jdaddWebDiscount();
-		webDiscountController.add(addVo);
+		if (addVo != null){
+			webDiscountController.add(addVo);
+			JOptionPane.showMessageDialog(null, "促销策略成功添加！", "Success", JOptionPane.PLAIN_MESSAGE, null);
+			jdAddWebDiscount.dispose();
+		}	
 		refresh();
 	}
 

@@ -8,12 +8,13 @@ import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifyVIPListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifyVIPListener;
-import hrs.client.util.DoubleFormat;
 import hrs.client.util.HMSBlueButton;
+import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.WebDiscountVO;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -34,6 +35,7 @@ public class VIPDiaog extends JDialog {
 	private WebDiscountVO webDiscountVO;
 	private ConfirmModifyVIPListener listener;
 	private CancelModifyVIPListener cancelListener;
+	private JLabel jlDisc;
 
 	/**
 	 * Create the dialog.
@@ -52,7 +54,7 @@ public class VIPDiaog extends JDialog {
 		this.setModal(true);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
-		
+
 		getContentPane().setLayout(null);
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,10 +72,9 @@ public class VIPDiaog extends JDialog {
 
 		jtextDiscount = new JTextField();
 		jtextDiscount.setFont(UIConstants.FONT_17);
-		jtextDiscount.setBounds(185, 94, 130, 26);
+		jtextDiscount.setBounds(206, 94, 109, 26);
 		getContentPane().add(jtextDiscount);
 		jtextDiscount.setColumns(10);
-		jtextDiscount.setText(webDiscountVO.discount + "");
 
 		jcomboBoxVIP = new JComboBox<Object>();
 		jcomboBoxVIP.setFont(UIConstants.FONT_18);
@@ -93,13 +94,32 @@ public class VIPDiaog extends JDialog {
 		jbCancelModify.setFont(UIConstants.FONT_16);
 		jbCancelModify.setBounds(206, 157, 96, 29);
 		getContentPane().add(jbCancelModify);
+
+		jlDisc = new JLabel("0.");
+		jlDisc.setBounds(185, 94, 29, 26);
+		jlDisc.setFont(UIConstants.FONT_17);
+		getContentPane().add(jlDisc);
+
 		cancelListener = new CancelModifyVIPListener(this);
 		jbCancelModify.addMouseListener(cancelListener);
 	}
 
 	public WebDiscountVO getModifyVO() {
 		int newVIPLevel = Integer.parseInt(jcomboBoxVIP.getSelectedItem().toString());
-		double newDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
+		double newDiscount = 0;
+		if (!RegExpHelper.matchOnlyNum(jtextDiscount.getText())) {
+			JOptionPane.showMessageDialog(null, "折扣信息中不能包含非数字字符！", "Error", JOptionPane.WARNING_MESSAGE);
+		} else if (jtextDiscount.getText().length() > 2) {
+			JOptionPane.showMessageDialog(null, "折扣信息中只能包含一位或两位有效数字！", "Error", JOptionPane.WARNING_MESSAGE);
+		} else if (Integer.valueOf(jtextDiscount.getText()) == 0) {
+			JOptionPane.showMessageDialog(null, "促销策略不为0！", "Error", JOptionPane.WARNING_MESSAGE);
+		} else {
+			if (jtextDiscount.getText().length() == 1) {
+				newDiscount = Double.valueOf(jtextDiscount.getText()) / 10;
+			} else {
+				newDiscount = Double.valueOf(jtextDiscount.getText()) / 100;
+			}
+		}
 		webDiscountVO.VIPlevel = newVIPLevel;
 		webDiscountVO.discount = newDiscount;
 		// System.out.println(webDiscountVO);

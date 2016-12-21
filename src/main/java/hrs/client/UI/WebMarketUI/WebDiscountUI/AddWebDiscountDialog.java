@@ -11,8 +11,8 @@ import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelAddList
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.OKListener;
 import hrs.client.util.ControllerFactory;
 import hrs.client.util.DateChoosePanel;
-import hrs.client.util.DoubleFormat;
 import hrs.client.util.HMSBlueButton;
+import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.Controller.WebMarketController.IWebDiscountController;
 import hrs.common.VO.CommercialCircleVO;
@@ -68,6 +68,7 @@ public class AddWebDiscountDialog extends JDialog {
 	private List<LocationVO> locs;
 	private List<CommercialCircleVO> commercialCircleList;
 	private int locationIndex;
+	private JLabel jlDisc;
 
 	/**
 	 * Launch the application.
@@ -166,7 +167,7 @@ public class AddWebDiscountDialog extends JDialog {
 
 		jtextDiscount = new JTextField();
 		jtextDiscount.setFont(UIConstants.FONT_17);
-		jtextDiscount.setBounds(238, 297, 261, 26);
+		jtextDiscount.setBounds(259, 297, 240, 26);
 		jtextDiscount.setColumns(10);
 		jtextDiscount.setText("");
 
@@ -185,6 +186,10 @@ public class AddWebDiscountDialog extends JDialog {
 		jbCancel.setFont(UIConstants.FONT_17);
 		cancelAddListener = new CancelAddListener(this);
 		jbCancel.addMouseListener(cancelAddListener);
+
+		jlDisc = new JLabel("0.");
+		jlDisc.setFont(UIConstants.FONT_18);
+		jlDisc.setBounds(238, 297, 19, 26);
 
 		setUnableAndCombox();
 
@@ -207,6 +212,7 @@ public class AddWebDiscountDialog extends JDialog {
 		jpAdd.add(jcomboBoxType);
 		jpAdd.add(jbOK);
 		jpAdd.add(jbCancel);
+		jpAdd.add(jlDisc);
 	}
 
 	public void initWebDiscountDialog() {
@@ -298,40 +304,77 @@ public class AddWebDiscountDialog extends JDialog {
 			if (jtextDiscount.getText().equals("") || jcomboBoxCommercialCircle.getSelectedIndex() == -1
 					|| jcomboBoxLocation.getSelectedIndex() == -1) {
 				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
+			} else if (!RegExpHelper.matchOnlyNum(jtextDiscount.getText())) {
+				JOptionPane.showMessageDialog(null, "折扣信息中不能包含非数字字符！", "Error", JOptionPane.WARNING_MESSAGE);
+			} else if (jtextDiscount.getText().length() > 2) {
+				JOptionPane.showMessageDialog(null, "折扣信息中只能包含一位或两位有效数字！", "Error", JOptionPane.WARNING_MESSAGE);
+			} else if (Integer.valueOf(jtextDiscount.getText()) == 0) {
+				JOptionPane.showMessageDialog(null, "促销策略不为0！", "Error", JOptionPane.WARNING_MESSAGE);
 			} else {
-				double commercialCircleDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
+				double discount = 0;
+				if (jtextDiscount.getText().length() == 1) {
+					discount = Double.valueOf(jtextDiscount.getText()) / 10;
+				} else {
+					discount = Double.valueOf(jtextDiscount.getText()) / 100;
+				}
 				locationIndex = jcomboBoxLocation.getSelectedIndex();
 				location = locs.get(locationIndex);
 				int commercialCircleIndex = jcomboBoxCommercialCircle.getSelectedIndex();
 				commercialCircle = commercialCircleList.get(commercialCircleIndex);
-				addVO = new WebDiscountVO(commercialCircleDiscount, WebsiteDiscountType.SpecialCommercialCircle,
-						location, commercialCircle, null, null, 0);
+				addVO = new WebDiscountVO(discount, WebsiteDiscountType.SpecialCommercialCircle, location,
+						commercialCircle, null, null, 0);
 			}
 			break;
 		case "特定期间折扣":// vo改变
 			if (jtextDiscount.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
+			} else if (!RegExpHelper.matchOnlyNum(jtextDiscount.getText())) {
+				JOptionPane.showMessageDialog(null, "折扣信息中不能包含非数字字符！", "Error", JOptionPane.WARNING_MESSAGE);
+			} else if (jtextDiscount.getText().length() > 2) {
+				JOptionPane.showMessageDialog(null, "折扣信息中只能包含一位或两位有效数字！", "Error", JOptionPane.WARNING_MESSAGE);
+			} else if (Integer.valueOf(jtextDiscount.getText()) == 0) {
+				JOptionPane.showMessageDialog(null, "促销策略不为0！", "Error", JOptionPane.WARNING_MESSAGE);
 			} else {
-				double specialPeriodDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
+				double discount = 0;
+				if (jtextDiscount.getText().length() == 1) {
+					discount = Double.valueOf(jtextDiscount.getText()) / 10;
+				} else {
+					discount = Double.valueOf(jtextDiscount.getText()) / 100;
+				}
 				Date discountBeginTime = jtextBegintime.getDate();
 				Date discountEndTime = jtextEndtime.getDate();
-				addVO = new WebDiscountVO(specialPeriodDiscount, WebsiteDiscountType.SpecialPeriod, null, null,
-						discountBeginTime, discountEndTime, 0);
+				addVO = new WebDiscountVO(discount, WebsiteDiscountType.SpecialPeriod, null, null, discountBeginTime,
+						discountEndTime, 0);
 			}
 			break;
 		case "会员等级折扣":
+			double discount = 0;
+			int VIPLevel = 0;
 			if (jcomboBoxVIPLevel.getSelectedIndex() == -1 || jtextDiscount.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "请完整填写折扣信息！", "Error", JOptionPane.ERROR_MESSAGE);
+			} else if (!RegExpHelper.matchOnlyNum(jtextDiscount.getText())) {
+				JOptionPane.showMessageDialog(null, "折扣信息中不能包含非数字字符！", "Error", JOptionPane.WARNING_MESSAGE);
+			} else if (jtextDiscount.getText().length() > 2) {
+				JOptionPane.showMessageDialog(null, "折扣信息中只能包含一位或两位有效数字！", "Error", JOptionPane.WARNING_MESSAGE);
+			} else if (Integer.valueOf(jtextDiscount.getText()) == 0) {
+				JOptionPane.showMessageDialog(null, "促销策略不为0！", "Error", JOptionPane.WARNING_MESSAGE);
 			} else {
-				int VIPLevel = Integer.parseInt(jcomboBoxVIPLevel.getSelectedItem().toString());
-				double vipDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
-				addVO = new WebDiscountVO(vipDiscount, WebsiteDiscountType.VIP, null, null, null, null, VIPLevel);
+
+				if (jtextDiscount.getText().length() == 1) {
+					discount = Double.valueOf(jtextDiscount.getText()) / 10;
+				} else {
+					discount = Double.valueOf(jtextDiscount.getText()) / 100;
+				}
+				VIPLevel = Integer.parseInt(jcomboBoxVIPLevel.getSelectedItem().toString());
+				addVO = new WebDiscountVO(discount, WebsiteDiscountType.VIP, null, null, null, null, VIPLevel);
 			}
+
 			break;
 		default:
 			JOptionPane.showMessageDialog(null, "请选择折扣类型！", "Error", JOptionPane.ERROR_MESSAGE);
 			break;
 		}
+		// System.out.println(addVO);
 		return addVO;// 从dialog返回一个有数据的vo给jp
 	}
 
@@ -339,9 +382,9 @@ public class AddWebDiscountDialog extends JDialog {
 		return jcomboBoxType.getSelectedIndex();
 	}
 
-	public double getDiscount() {
-		return jdaddWebDiscount().discount;
-	}
+	// public double getDiscount() {
+	// return discount;
+	// }
 
 	private Object[] locToName() {
 		locs = controller.findAllLocations();

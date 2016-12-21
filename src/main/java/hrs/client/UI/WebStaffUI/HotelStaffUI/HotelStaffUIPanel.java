@@ -31,7 +31,6 @@ public class HotelStaffUIPanel extends JPanel {
 	private JLabel jlSearchHotelStaff;
 	private JComboBox<Object> jcomboBoxType;
 	private JLabel jlHotelName;
-	private JTextField jtextPassword;
 	private JTextField jtextRealName;
 	private HMSBlueButton jbSearchHotelStaffConfirm;
 	private HMSBlueButton jbModifyHotelStaff;
@@ -42,6 +41,7 @@ public class HotelStaffUIPanel extends JPanel {
 	private JLabel jlHotelNameShow;
 	private JLabel jlUsernameShow;
 	private JLabel jlRealName;
+	private JLabel jlPassWord;
 
 	/**
 	 * Create the panel.
@@ -91,11 +91,6 @@ public class HotelStaffUIPanel extends JPanel {
 		jlHotelName.setBounds(55, 309, 84, 26);
 		jlHotelName.setFont(UIConstants.JLABEL_FONT);
 
-		jtextPassword = new JTextField();
-		jtextPassword.setFont(UIConstants.FONT_17);
-		jtextPassword.setBounds(218, 183, 196, 35);
-		jtextPassword.setColumns(10);
-
 		jtextRealName = new JTextField();
 		jtextRealName.setFont(UIConstants.FONT_17);
 		jtextRealName.setBounds(218, 246, 196, 35);
@@ -115,6 +110,10 @@ public class HotelStaffUIPanel extends JPanel {
 		jlUsernameShow.setFont(UIConstants.FONT_19);
 		jlUsernameShow.setBounds(218, 126, 196, 29);
 		
+		jlPassWord = new JLabel("");
+		jlPassWord.setFont(UIConstants.FONT_21);
+		jlPassWord.setBounds(218, 192, 75, 29);
+		
 		setLayout(null);
 		add(jlSearchHotelStaff);
 		add(jcomboBoxType);
@@ -125,10 +124,10 @@ public class HotelStaffUIPanel extends JPanel {
 		add(jlUsernameShow);
 		add(jlHotelNameShow);
 		add(jtextRealName);
-		add(jtextPassword);
 		add(jtextInput);
 		add(jbSearchHotelStaffConfirm);
 		add(jbModifyHotelStaff);
+		add(jlPassWord);
 
 	}
 
@@ -169,7 +168,7 @@ public class HotelStaffUIPanel extends JPanel {
 		if (toAddStaffVOs.size() == 1) {
 			selection = toAddStaffVOs.get(0);
 			jlUsernameShow.setText(selection.username);
-			jtextPassword.setText(selection.password);
+			jlPassWord.setText("******");
 			jtextRealName.setText(selection.name);
 			jlHotelNameShow.setText(selection.hotel.name);
 		}
@@ -194,7 +193,7 @@ public class HotelStaffUIPanel extends JPanel {
 			}
 			selection = toAddStaffVOs.get(index);
 			jlUsernameShow.setText(selection.username);
-			jtextPassword.setText(selection.password);
+			jlPassWord.setText("******");
 			jtextRealName.setText(selection.name);
 			jlHotelNameShow.setText(selection.hotel.name);
 		}
@@ -210,21 +209,15 @@ public class HotelStaffUIPanel extends JPanel {
 	}
 
 	public void modify() {
-		String newPassword = jtextPassword.getText();
 		String newRealName = jtextRealName.getText();
-		selection.password = newPassword;
 		selection.name = newRealName;
 		selection.hotel = selection.hotel;
 		controller.updateStaff(selection);
 	}// 酒店名称默认不可修改
 
-	public String getPassword() {
-		return jtextPassword.getText();
-	}
-
 	public void clear() {
 		jlUsernameShow.setText("");
-		jtextPassword.setText("");
+		jlPassWord.setText("");
 		jtextRealName.setText("");
 		jlHotelNameShow.setText("");
 	}

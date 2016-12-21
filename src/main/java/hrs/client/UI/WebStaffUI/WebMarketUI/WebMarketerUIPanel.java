@@ -28,7 +28,6 @@ public class WebMarketerUIPanel extends JPanel {
 	private JLabel jlWebMarketerPassword;
 	private JLabel jlWebMarketerRealName;
 	private JTextField jtextWebMarketerUsername;
-	private JTextField jtextPassword;
 	private JTextField jtextWebMarketerRealName;
 	private HMSBlueButton jbSearchWebMarketerConfirm;
 	private HMSBlueButton jbModifyWebMarketer;
@@ -40,6 +39,7 @@ public class WebMarketerUIPanel extends JPanel {
 	private AddWebMarketerMouseListener addWebMarketerMouseListener;
 	private AddWebMarketerDialog addWebMarketerDialog = new AddWebMarketerDialog(this);
 	private JLabel jlUsernameShow;
+	private JLabel jlPassWord;
 
 	/**
 	 * Create the panel.
@@ -72,11 +72,6 @@ public class WebMarketerUIPanel extends JPanel {
 		jtextWebMarketerUsername.setFont(UIConstants.FONT_19);
 		jtextWebMarketerUsername.setBounds(298, 53, 215, 37);
 		jtextWebMarketerUsername.setColumns(10);
-
-		jtextPassword = new JTextField();
-		jtextPassword.setFont(UIConstants.FONT_19);
-		jtextPassword.setBounds(298, 198, 215, 37);
-		jtextPassword.setColumns(10);
 
 		jtextWebMarketerRealName = new JTextField();
 		jtextWebMarketerRealName.setFont(UIConstants.FONT_19);
@@ -111,12 +106,16 @@ public class WebMarketerUIPanel extends JPanel {
 		add(jlWebMarketerPassword);
 		add(jlWebMarketerRealName);
 		add(jtextWebMarketerRealName);
-		add(jtextPassword);
 		add(jtextWebMarketerUsername);
 		add(jlUsernameShow);
 		add(jbSearchWebMarketerConfirm);
 		add(jbModifyWebMarketer);
 		add(jbAddWebMarketer);
+		
+		jlPassWord = new JLabel("");
+		jlPassWord.setFont(UIConstants.FONT_21);
+		jlPassWord.setBounds(298, 208, 96, 16);
+		add(jlPassWord);
 	}
 
 	public StaffVO searchAndShow() {
@@ -131,7 +130,7 @@ public class WebMarketerUIPanel extends JPanel {
 				JOptionPane.showMessageDialog(this, "网站营销人员不存在！", "No Such WebMarketer", JOptionPane.ERROR_MESSAGE);
 			}
 			jlUsernameShow.setText(webMarketerVO.username);
-			jtextPassword.setText(webMarketerVO.password);
+			jlPassWord.setText("******");
 			jtextWebMarketerRealName.setText(webMarketerVO.name);
 			return webMarketerVO;
 		}
@@ -141,14 +140,8 @@ public class WebMarketerUIPanel extends JPanel {
 		return jlUsernameShow.getText();
 	}
 
-	public String getPassword() {
-		return jtextPassword.getText();
-	}
-
 	public void modify() {
-		String newPassword = jtextPassword.getText();
 		String newName = jtextWebMarketerRealName.getText();
-		webMarketerVO.password = newPassword;
 		webMarketerVO.name = newName;
 		controller.updateStaff(webMarketerVO);
 	}

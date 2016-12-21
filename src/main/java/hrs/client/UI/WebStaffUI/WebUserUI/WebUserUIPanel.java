@@ -90,15 +90,10 @@ public class WebUserUIPanel extends JPanel {
 	}
 
 	public void modify() {
-		userVO.password = showUserInfoPanel.getPassword();
 		userVO.name = showUserInfoPanel.getRealName();
 		userVO.birthDate = showUserInfoPanel.getBirthday();
 		userVO.phone = showUserInfoPanel.getPhone();
 		controller.updateUser(userVO);
-	}
-
-	public String getNewPassword() {
-		return showUserInfoPanel.getPassword();
 	}
 
 	public String getName() {

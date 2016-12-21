@@ -9,12 +9,13 @@ import javax.swing.border.EmptyBorder;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.CancelModifySpecialPeriodDiscountListener;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener.ConfirmModifySpecialPeriodListener;
 import hrs.client.util.DateChoosePanel;
-import hrs.client.util.DoubleFormat;
 import hrs.client.util.HMSBlueButton;
+import hrs.client.util.RegExpHelper;
 import hrs.client.util.UIConstants;
 import hrs.common.VO.WebDiscountVO;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.util.Date;
 
@@ -36,6 +37,7 @@ public class SpecialPeriodDialog extends JDialog {
 	private WebDiscountVO webDiscountVO;
 	private ConfirmModifySpecialPeriodListener listener;
 	private CancelModifySpecialPeriodDiscountListener cancelListener;
+	private JLabel jlDisc;
 
 	public SpecialPeriodDialog(WebDiscountPanel webDiscountPanel) {
 		this.webDiscountPanel = webDiscountPanel;
@@ -93,10 +95,9 @@ public class SpecialPeriodDialog extends JDialog {
 
 		jtextDiscount = new JTextField();
 		jtextDiscount.setFont(UIConstants.FONT_17);
-		jtextDiscount.setBounds(144, 149, 249, 26);
+		jtextDiscount.setBounds(166, 149, 227, 26);
 		contentPanel.add(jtextDiscount);
 		jtextDiscount.setColumns(10);
-		jtextDiscount.setText(webDiscountVO.discount + "");
 
 		jbConfirmModify = new HMSBlueButton("确认修改");
 		jbConfirmModify.setFont(UIConstants.FONT_16);
@@ -109,6 +110,12 @@ public class SpecialPeriodDialog extends JDialog {
 		jbCancalModify.setFont(UIConstants.FONT_16);
 		jbCancalModify.setBounds(235, 204, 103, 29);
 		contentPanel.add(jbCancalModify);
+
+		jlDisc = new JLabel("0.");
+		jlDisc.setBounds(142, 149, 25, 26);
+		jlDisc.setFont(UIConstants.FONT_17);
+		contentPanel.add(jlDisc);
+
 		cancelListener = new CancelModifySpecialPeriodDiscountListener(this);
 		jbCancalModify.addMouseListener(cancelListener);
 
@@ -117,7 +124,21 @@ public class SpecialPeriodDialog extends JDialog {
 	public WebDiscountVO getModifyVO() {
 		Date newBeginTime = jtextBeginTime.getDate();
 		Date newEndTime = jtextEndTime.getDate();
-		double newDiscount = Double.parseDouble(DoubleFormat.format(jtextDiscount.getText()));
+		double newDiscount = 0;
+		if (!RegExpHelper.matchOnlyNum(jtextDiscount.getText())) {
+			JOptionPane.showMessageDialog(null, "折扣信息中不能包含非数字字符！", "Error", JOptionPane.WARNING_MESSAGE);
+		} else if (jtextDiscount.getText().length() > 2) {
+			JOptionPane.showMessageDialog(null, "折扣信息中只能包含一位或两位有效数字！", "Error", JOptionPane.WARNING_MESSAGE);
+		} else if (Integer.valueOf(jtextDiscount.getText()) == 0) {
+			JOptionPane.showMessageDialog(null, "促销策略不为0！", "Error", JOptionPane.WARNING_MESSAGE);
+		} else {
+			if (jtextDiscount.getText().length() == 1) {
+				newDiscount = Double.valueOf(jtextDiscount.getText()) / 10;
+			} else {
+				newDiscount = Double.valueOf(jtextDiscount.getText()) / 100;
+			}
+
+		}
 		webDiscountVO.beginTime = newBeginTime;
 		webDiscountVO.endTime = newEndTime;
 		webDiscountVO.discount = newDiscount;

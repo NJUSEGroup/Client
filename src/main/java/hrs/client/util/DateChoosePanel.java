@@ -1,9 +1,6 @@
 package hrs.client.util;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.awt.Font;
-import java.awt.Graphics;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;

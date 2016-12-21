@@ -3,8 +3,6 @@ package hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JOptionPane;
-
 import hrs.client.UI.WebMarketUI.WebDiscountUI.SpecialPeriodDialog;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 
@@ -22,9 +20,7 @@ public class ConfirmModifySpecialPeriodListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (specialPeriodDialog.getNewDiscount() < 0 || specialPeriodDialog.getNewDiscount() >= 1) {
-			JOptionPane.showMessageDialog(null, "折扣大于0，小于1！", "Error", JOptionPane.ERROR_MESSAGE);
-		} else {
+		if (specialPeriodDialog.getNewDiscount() != 0) {
 			WebDiscountPanel.modifyWebDiscount();
 			specialPeriodDialog.dispose();
 		}
