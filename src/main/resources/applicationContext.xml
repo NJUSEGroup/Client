@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="loginController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/LoginController" />
+		<property name="serviceInterface" value="hrs.common.Controller.LoginController.ILoginController" />
+	</bean>
+	
+	<bean id="userController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/UserController" />
+		<property name="serviceInterface" value="hrs.common.Controller.UserController.IUserController" />
+	</bean>
+	
+	<bean id="userHotelController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/UserHotelController" />
+		<property name="serviceInterface" value="hrs.common.Controller.UserController.IUserHotelController" />
+	</bean>
+	
+	<bean id="userOrderController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/UserOrderController" />
+		<property name="serviceInterface" value="hrs.common.Controller.UserController.IUserOrderController" />
+	</bean>
+	
+	
+	
+	<bean id="hotelController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/HotelController" />
+		<property name="serviceInterface" value="hrs.common.Controller.HotelController.IHotelController" />
+	</bean>
+	
+	
+	<bean id="hotelDiscountController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/HotelDiscountController" />
+		<property name="serviceInterface" value="hrs.common.Controller.HotelController.IHotelDiscountController" />
+	</bean>
+	
+	
+	<bean id="hotelOrderController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/HotelOrderController" />
+		<property name="serviceInterface" value="hrs.common.Controller.HotelController.IHotelOrderController" />
+	</bean>
+	
+	<bean id="offlineRecordController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/OfflineRecordController" />
+		<property name="serviceInterface" value="hrs.common.Controller.HotelController.IOfflineRecordController" />
+	</bean>
+	
+	<bean id="roomController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/RoomController" />
+		<property name="serviceInterface" value="hrs.common.Controller.HotelController.IRoomController" />
+	</bean>
+	
+	<bean id="webCreditController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/WebCreditController" />
+		<property name="serviceInterface" value="hrs.common.Controller.WebMarketController.IWebCreditController" />
+	</bean>
+	
+	<bean id="webDiscountController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/WebDiscountController" />
+		<property name="serviceInterface" value="hrs.common.Controller.WebMarketController.IWebDiscountController" />
+	</bean>
+	
+	<bean id="webOrderController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/WebOrderController" />
+		<property name="serviceInterface" value="hrs.common.Controller.WebMarketController.IWebOrderController" />
+	</bean>
+	
+	<bean id="webStaffController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/WebStaffController" />
+		<property name="serviceInterface" value="hrs.common.Controller.WebStaffController.IWebStaffController" />
+	</bean>
+	
+	<bean id="webUserController" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<!-- 这里的value就是地址+serviceName的值 -->
+		<property name="serviceUrl" value="rmi://127.0.0.1:1199/WebUserController" />
+		<property name="serviceInterface" value="hrs.common.Controller.WebStaffController.IWebUserController" />
+	</bean>
+</beans>
