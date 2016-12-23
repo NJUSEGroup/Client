@@ -14,5 +14,5 @@ public interface IWebOrderController {
 	void revokeOrder(OrderVO ordervo,RestoreValueType type);
 	List<OrderVO> findOrderByUsername(String username) throws OrderNotFoundException;
 	List<OrderVO> findOrderByUsernameAndStatus(String username, OrderStatus status) throws OrderNotFoundException;
-	List<OrderVO> findOrderByOrderStatusAndTime(OrderStatus status,Date date) throws OrderNotFoundException;
+	List<OrderVO> findOrderByOrderStatusAndPlaceTime(OrderStatus status,Date date) throws OrderNotFoundException;
 }
