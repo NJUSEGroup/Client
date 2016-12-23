@@ -1,4 +1,4 @@
-package hrs.client.UI.WebMarketUI.WebOrderUI;
+package hrs.client.UI.WebMarketUI.UnexecutedOrderUI;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,12 +12,12 @@ import javax.swing.table.TableModel;
 import hrs.common.VO.OrderVO;
 import hrs.common.util.DateHelper;
 
-public class WebOrderModel implements TableModel {
+public class UnexecutedOrderModel implements TableModel {
 	private List<OrderVO> ordervoList;
 	private ResourceBundle rb = ResourceBundle.getBundle("orderStatus", Locale.getDefault());
 	private ResourceBundle rb_Second = ResourceBundle.getBundle("hotel", Locale.getDefault());
 
-	public WebOrderModel(List<OrderVO> orderVoList) {
+	public UnexecutedOrderModel(List<OrderVO> orderVoList) {
 		// TODO Auto-generated constructor stub
 		this.ordervoList = orderVoList;
 	}
@@ -34,7 +34,7 @@ public class WebOrderModel implements TableModel {
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 9;
+		return 8;
 	}
 
 	@Override
@@ -43,7 +43,6 @@ public class WebOrderModel implements TableModel {
 		List<String> list = new ArrayList<>();
 		list.add("订单号");
 		list.add("下单时间");
-		list.add("执行时间");
 		list.add("用户名");
 		list.add("酒店名称");
 		list.add("房间类型");
@@ -77,19 +76,15 @@ public class WebOrderModel implements TableModel {
 				String string = DateHelper.format(date);
 				return string;
 			} else if (columnIndex == 2) {
-				Date date = orderVO.execTime;
-				String string = DateHelper.format(date);
-				return string;
-			} else if (columnIndex == 3) {
 				return orderVO.user.username;
-			} else if (columnIndex == 4) {
+			} else if (columnIndex == 3) {
 				return orderVO.hotel.name;
-			} else if (columnIndex == 5) {
+			} else if (columnIndex == 4) {
 				String type = rb_Second.getString("Room." + orderVO.type.toString());
 				return type;
-			} else if (columnIndex == 6) {
+			} else if (columnIndex == 5) {
 				return orderVO.roomNum + "";
-			} else if (columnIndex == 7) {
+			} else if (columnIndex == 6) {
 				return orderVO.value + "";
 			} else {
 				String outputType = rb.getString("Order." + orderVO.status.toString());
@@ -119,11 +114,6 @@ public class WebOrderModel implements TableModel {
 	public void removeTableModelListener(TableModelListener l) {
 		// TODO Auto-generated method stub
 
-	}
-
-	public OrderVO getValue(int selectedRow) {
-		// TODO Auto-generated method stub
-		return ordervoList.get(selectedRow);
 	}
 
 }

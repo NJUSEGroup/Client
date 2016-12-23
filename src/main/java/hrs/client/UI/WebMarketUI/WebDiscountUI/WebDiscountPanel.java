@@ -93,8 +93,6 @@ public class WebDiscountPanel extends JPanel {
 
 		jTable = new JTable();
 		jTable.setModel(model);
-		// jTable.setEnabled(false);
-
 		jTable.setBackground(UIConstants.JFRAME);
 		jTable.setFont(UIConstants.FONT_18);
 		jTable.setRowHeight(40);
@@ -116,7 +114,7 @@ public class WebDiscountPanel extends JPanel {
 		scrollPane.getViewport().setBackground(UIConstants.JFRAME);
 		setLayout(null);
 		scrollPane.setOpaque(true);
-		add(scrollPane);
+
 		add(scrollPane);
 		add(jbAdd);
 		add(jbModify);

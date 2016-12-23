@@ -30,6 +30,8 @@ public class MenulistPanelMouseListener extends MouseAdapter {
 		String string = jLabel.getText();
 		if (string.equals("促销策略")) {
 			cardLayout.show(jPanel, "促销策略");
+		} else if (string.equals("未执行订单")) {
+			cardLayout.show(jPanel, "未执行订单");
 		} else if (string.equals("异常订单")) {
 			cardLayout.show(jPanel, "异常订单");
 		} else if (string.equals("信用充值")) {

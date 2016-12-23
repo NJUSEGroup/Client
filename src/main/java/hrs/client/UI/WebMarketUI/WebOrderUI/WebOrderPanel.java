@@ -63,8 +63,12 @@ public class WebOrderPanel extends JPanel {
 		jbRevoke.setBounds(881, 643, 90, 40);
 		jbRevoke.addMouseListener(new RevokeMouseListener(this));
 
-		jlNumberOfPO = new JLabel("共" + orderList.size() + "条记录");
-		jlNumberOfPO.setBounds(43, 599, 79, 21);
+		if (orderList == null) {
+			jlNumberOfPO = new JLabel("共 0 条记录");
+		} else {
+			jlNumberOfPO = new JLabel("共" + orderList.size() + "条记录");
+		}
+		jlNumberOfPO.setBounds(43, 599, 100, 21);
 		jlNumberOfPO.setFont(UIConstants.FONT_17);
 
 		jlSearch = new JLabel("搜索");
@@ -106,13 +110,12 @@ public class WebOrderPanel extends JPanel {
 
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(jTable);
-		scrollPane.setBounds(3, 70, 1050, 560);
+		scrollPane.setBounds(3, 70, 1050, 530);
 		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		scrollPane.getViewport().setBackground(UIConstants.JFRAME);
 		setLayout(null);
 		scrollPane.setOpaque(true);
-		
-		add(scrollPane);
+
 		add(scrollPane);
 		add(jbRevoke);
 		add(jlNumberOfPO);

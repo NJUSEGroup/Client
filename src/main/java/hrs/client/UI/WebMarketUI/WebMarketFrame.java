@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import hrs.client.UI.WebMarketUI.CreditChargeUI.CreditChargePanel;
 import hrs.client.UI.WebMarketUI.Listener.MenulistPanelMouseListener;
+import hrs.client.UI.WebMarketUI.UnexecutedOrderUI.UnexecutedOrderPanel;
 import hrs.client.UI.WebMarketUI.WebDiscountUI.WebDiscountPanel;
 import hrs.client.UI.WebMarketUI.WebOrderUI.WebOrderPanel;
 import hrs.client.util.UIConstants;
@@ -27,6 +28,7 @@ public class WebMarketFrame extends JFrame {
 	private MenulistPanel jpMenulist;
 	private WebOrderPanel jpWebOrder;
 	private WebDiscountPanel jpWebDiscount;
+	private UnexecutedOrderPanel jpUnexecutedOrder;
 	private CreditChargePanel jpCreditCharge;
 	private MenulistPanelMouseListener listener;
 	private StaffVO staffVO;
@@ -83,10 +85,12 @@ public class WebMarketFrame extends JFrame {
 
 		jpWebOrder = new WebOrderPanel();
 		jpWebDiscount = new WebDiscountPanel();
+		jpUnexecutedOrder=new UnexecutedOrderPanel();
 		jpCreditCharge = new CreditChargePanel();
 
 		jpCard.setLayout(cardLayout);
 		jpCard.add(jpWebDiscount, "促销策略");
+		jpCard.add(jpUnexecutedOrder, "未执行订单");
 		jpCard.add(jpWebOrder, "异常订单");
 		jpCard.add(jpCreditCharge, "信用充值");
 		cardLayout.show(jpCard, "促销策略");
