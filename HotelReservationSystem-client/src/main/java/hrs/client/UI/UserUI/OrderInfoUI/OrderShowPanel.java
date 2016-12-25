@@ -160,8 +160,8 @@ public class OrderShowPanel extends CommonPanel {
 		try {
 			return controller.findOrdersByUsernameAndStatus(userVO.username, status);
 		} catch (OrderNotFoundException e) {
-			JOptionPane.showConfirmDialog(null, "未找到相关订单", "提示", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 			List<OrderVO> list = new ArrayList<>();
+			JOptionPane.showConfirmDialog(null, "未找到相关订单", "提示", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 			return list;
 			
 		}

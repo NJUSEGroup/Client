@@ -1,15 +1,15 @@
 package hrs.client.UI.UserUI.HotelSearchUI;
 
 import java.awt.CardLayout;
-import java.awt.Panel;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import hrs.client.UI.UserUI.Components.ComNeedBackPanel;
-import hrs.client.UI.UserUI.Components.CommonPanel;
 import hrs.client.util.ControllerFactory;
 import hrs.common.Controller.UserController.IUserHotelController;
+import hrs.common.Controller.UserController.IUserOrderController;
 import hrs.common.VO.HotelVO;
 import hrs.common.VO.RoomVO;
 import hrs.common.VO.UserVO;
@@ -84,7 +84,13 @@ public class HotelPanel extends ComNeedBackPanel {
 	 */
 	@Override
 	public void placeOrder() {
-		hotelSearchPanel.placeOrder();
+		IUserOrderController orderController = ControllerFactory.getUserOrderController();
+		if(orderController.validateCredit(user.username))
+			hotelSearchPanel.placeOrder();
+		else{
+			JOptionPane.showMessageDialog(null, "信用值不足，请充值！", "提示", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 	}
 	
 	/**
@@ -95,6 +101,12 @@ public class HotelPanel extends ComNeedBackPanel {
 	 * @param user 
 	 */
 	public void showOrderPanel(HotelVO hotel,List<RoomVO> rooms,BeginAndLeaveTime orderTime, UserVO user){
+		IUserOrderController orderController = ControllerFactory.getUserOrderController();
+		if(!orderController.validateCredit(user.username)){
+			JOptionPane.showMessageDialog(null, "信用值不足，请充值！", "提示", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+	
 		placeOrderPanel = new PlaceOrderPanel(hotel, rooms, orderTime,user);
 		placeOrderPanel.setPanel(this);
 		hotelCardPanel.add("placeOrder", placeOrderPanel);

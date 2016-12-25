@@ -23,6 +23,10 @@ import hrs.common.VO.RoomVO;
 import hrs.common.VO.UserVO;
 
 public class ComHotelDetail extends CommonPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6594767274579098522L;
 	protected ComNeedBackPanel panel;
 	protected HotelDetailInfoPanel detailInfoPanel;
 	protected IUserHotelController controller;
