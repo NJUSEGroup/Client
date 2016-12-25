@@ -1,8 +1,11 @@
 package hrs.common.VO;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import hrs.common.POJO.HotelPO;
+import hrs.common.util.type.OrderStatus;
 
 public class HotelVO implements Serializable {
 	/**
