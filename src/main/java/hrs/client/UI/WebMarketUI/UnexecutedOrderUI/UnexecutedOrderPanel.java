@@ -43,27 +43,27 @@ public class UnexecutedOrderPanel extends JPanel {
 	public void init() {
 		setSize(1080, 722);
 		setBackground(UIConstants.JFRAME);
-		
+
 		date = new Date();
 		try {
 			unexecutedOrders = controller.findOrderByOrderStatusAndPlaceTime(OrderStatus.Unexecuted, date);
 		} catch (OrderNotFoundException e) {
 			JOptionPane.showMessageDialog(this, "此时未执行订单为空！", "Null", JOptionPane.INFORMATION_MESSAGE);
 		}
-		
-		if(unexecutedOrders==null){
+
+		if (unexecutedOrders == null) {
 			jlNumberOfPO = new JLabel("共 0 条记录");
-		}else{
-		jlNumberOfPO = new JLabel("共" + unexecutedOrders.size() + "条记录");
-		
+		} else {
+			jlNumberOfPO = new JLabel("共" + unexecutedOrders.size() + "条记录");
+
 		}
-		
-        jlNumberOfPO.setBounds(43, 599, 100, 21);
+
+		jlNumberOfPO.setBounds(43, 599, 100, 21);
 		jlNumberOfPO.setFont(UIConstants.FONT_17);
-		
+
 		jTable = new JTable();
 		model = new UnexecutedOrderModel(unexecutedOrders);
-		
+
 		jTable.setModel(model);
 		jTable.setBackground(UIConstants.JFRAME);
 		jTable.setFont(UIConstants.FONT_18);

@@ -50,6 +50,9 @@ public class CreditChargePanel extends JPanel {
 		init();
 	}
 
+	/**
+	 * 初始化信用充值界面
+	 */
 	public void init() {
 		setSize(1080, 722);
 		setBackground(UIConstants.JFRAME);
@@ -119,6 +122,11 @@ public class CreditChargePanel extends JPanel {
 		add(jbChargeValue);
 	}
 
+	/**
+	 * 获取用户信息并显示
+	 * @return
+	 * @throws UserNotFoundException
+	 */
 	public UserVO getUserVOAndShow() throws UserNotFoundException {
 		userVO = null;
 		if (jtUsername.getText().equals("")) {
@@ -139,6 +147,10 @@ public class CreditChargePanel extends JPanel {
 		return userVO;
 	}
 
+	/**
+	 * 为用户进行信用充值
+	 * @param value
+	 */
 	public void charge(int value) {
 		int result = JOptionPane.showConfirmDialog(null, "是否确定充值？", "提示", JOptionPane.YES_NO_OPTION,
 				JOptionPane.INFORMATION_MESSAGE);

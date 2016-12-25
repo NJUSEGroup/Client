@@ -58,6 +58,9 @@ public class WebDiscountPanel extends JPanel {
 		init();
 	}
 
+	/**
+	 * 初始化网站促销策略界面
+	 */
 	public void init() {
 		webDiscountController = ControllerFactory.getWebDiscountController();
 		webDiscountList = getWebDiscountList();
@@ -122,6 +125,9 @@ public class WebDiscountPanel extends JPanel {
 		add(jlNumberOfPO);
 	}
 
+	/**
+	 * 获取所有网站促销策略
+	 */
 	public List<WebDiscountVO> getWebDiscountList() {
 		List<WebDiscountVO> list = new ArrayList<>();
 		try {
@@ -134,21 +140,30 @@ public class WebDiscountPanel extends JPanel {
 		return list;
 	}
 
+	/**
+	 * 添加网站促销策略
+	 */
 	public void addWebDiscount() {
 		addVo = jdAddWebDiscount.jdaddWebDiscount();
-		if (addVo != null){
+		if (addVo != null) {
 			webDiscountController.add(addVo);
 			JOptionPane.showMessageDialog(null, "促销策略成功添加！", "Success", JOptionPane.PLAIN_MESSAGE, null);
 			jdAddWebDiscount.dispose();
-		}	
+		}
 		refresh();
 	}
 
+	/**
+	 * 删除某个网站促销策略
+	 */
 	public void deleteWebDiscount(WebDiscountVO vo) {
 		webDiscountController.delete(vo.id);
 		refresh();
 	}
 
+	/**
+	 * 显示修改网站促销策略的对话框
+	 */
 	public void showModifyDialog() {
 		if (getSelected() == null) {
 			JOptionPane.showMessageDialog(this, "请选中要修改的促销策略！", "Error", JOptionPane.ERROR_MESSAGE);
@@ -175,6 +190,9 @@ public class WebDiscountPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * 修改网站促销策略
+	 */
 	public void modifyWebDiscount() {
 		WebDiscountVO modifyVO = null;
 		switch (getSelected().type) {
@@ -195,6 +213,9 @@ public class WebDiscountPanel extends JPanel {
 		JOptionPane.showMessageDialog(null, "促销策略成功修改！", "Success", JOptionPane.PLAIN_MESSAGE, null);
 	}
 
+	/**
+	 * 获取选择到的某个网站促销策略
+	 */
 	public WebDiscountVO getSelected() {
 		if (jTable.getSelectedRow() != -1) {
 			return model.getValue(jTable.getSelectedRow());
@@ -202,12 +223,18 @@ public class WebDiscountPanel extends JPanel {
 			return null;
 	}
 
+	/**
+	 * 显示添加网站促销策略的对话框
+	 */
 	public void showAddDialog() {
 		jdAddWebDiscount = new AddWebDiscountDialog(this);
 		jdAddWebDiscount.setVisible(true);
 		jdAddWebDiscount.setLocationRelativeTo(null);
 	}
 
+	/**
+	 * 刷新网站促销策略管理界面
+	 */
 	public void refresh() {
 		model = new WebDiscountModel(getWebDiscountList());
 		jTable.setModel(model);

@@ -3,6 +3,7 @@ package hrs.client.UI.WebStaffUI.HotelAddUI;
 import java.awt.Color;
 
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
@@ -40,8 +41,8 @@ public class HotelStaffAddUIPanel extends JPanel {
 	private JLabel jlPassword;
 	private JLabel jlPasswordConfirm;
 	private JLabel jlHotelStaffRealName;
-	private JTextField jtextPassword;
-	private JTextField jtextPasswordConfirm;
+	private JPasswordField jtextPassword;
+	private JPasswordField jtextPasswordConfirm;
 	private JTextField jtextRealName;
 	private LastStepMouseListener lastStepMouseListener;
 	private WebStaffFrame webStaffFrame;
@@ -61,6 +62,9 @@ public class HotelStaffAddUIPanel extends JPanel {
 		init();
 	}
 
+	/**
+	 * 初始化酒店工作人员添加界面
+	 */
 	public void init() {
 		this.setSize(1080, 722);
 		this.setBackground(UIConstants.JFRAME);
@@ -101,11 +105,11 @@ public class HotelStaffAddUIPanel extends JPanel {
 		jlHotelStaffRealName.setHorizontalAlignment(SwingConstants.LEFT);
 		jlHotelStaffRealName.setFont(UIConstants.FONT_19);
 
-		jtextPassword = new JTextField();
+		jtextPassword = new JPasswordField();
 		jtextPassword.setFont(UIConstants.FONT_19);
 		jtextPassword.setColumns(10);
 
-		jtextPasswordConfirm = new JTextField();
+		jtextPasswordConfirm = new JPasswordField();
 		jtextPasswordConfirm.setFont(UIConstants.FONT_19);
 		jtextPasswordConfirm.setColumns(10);
 
@@ -223,6 +227,7 @@ public class HotelStaffAddUIPanel extends JPanel {
 		webStaffFrame.showHotelAddUIPanel();
 	}
 
+	@SuppressWarnings("deprecation")
 	public int passwordValid() {
 		if (jtextPassword.getText().equals(jtextPasswordConfirm.getText())) {
 			return 1;
@@ -230,16 +235,22 @@ public class HotelStaffAddUIPanel extends JPanel {
 			return 0;
 	}
 
+	/**
+	 * 添加酒店
+	 */
 	public void addHotel() {
 		hotelVO = this.hotelAddUIPanel.getHotelVO();
 		// System.out.println(hotelVO);
 		controller.addHotel(hotelVO);
 	}
 
+	/**
+	 * 添加酒店工作人员
+	 */
 	public void addHotelStaff() {
 		String username = jtextHotelStaffUsrname.getText();
-		String password = jtextPassword.getText();
-		String doublePassword = jtextPasswordConfirm.getText();
+		String password = new String(jtextPassword.getPassword());
+		String doublePassword = new String(jtextPasswordConfirm.getPassword());
 		String realName = jtextRealName.getText();
 		// HotelVO hotelVO=this.hotelAddUIPanel.getHotelVO();
 		if (username.equals("") || password.equals("") || doublePassword.equals("") || realName.equals("")) {
@@ -271,6 +282,9 @@ public class HotelStaffAddUIPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * 刷新界面
+	 */
 	public void refresh() {
 		hotelAddUIPanel.refresh();
 		jtextHotelStaffUsrname.setText("");
@@ -283,6 +297,7 @@ public class HotelStaffAddUIPanel extends JPanel {
 		return jtextHotelStaffUsrname.getText();
 	}
 
+	@SuppressWarnings("deprecation")
 	public String getPassword() {
 		return jtextPassword.getText();
 	}

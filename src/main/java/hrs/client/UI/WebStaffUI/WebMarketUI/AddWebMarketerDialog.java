@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import hrs.client.UI.WebStaffUI.WebMarketUI.WebMarketListener.AddWebMarketerDialogConfirmMouseListener;
@@ -24,7 +25,7 @@ public class AddWebMarketerDialog extends JDialog {
 	private static final long serialVersionUID = 3078896695933787804L;
 	private final JPanel jpAddWebMarketer = new JPanel();
 	private JTextField jtextUsername;
-	private JTextField jtextPassword;
+	private JPasswordField jtextPassword;
 	private JTextField jtextRealName;
 	private AddWebMarketerDialogConfirmMouseListener addWebMarketerDialogConfirmMouseListener;
 	private CancelAddMouseListener cancelAddMouseListener;
@@ -55,6 +56,9 @@ public class AddWebMarketerDialog extends JDialog {
 		init();
 	}
 
+	/**
+	 * 刷新网站营销人员添加界面
+	 */
 	public void init() {
 		setTitle("添加网站营销人员");
 		setBounds(100, 100, 400, 280);
@@ -86,7 +90,7 @@ public class AddWebMarketerDialog extends JDialog {
 		getContentPane().add(jtextUsername);
 		jtextUsername.setColumns(10);
 
-		jtextPassword = new JTextField();
+		jtextPassword = new JPasswordField();
 		jtextPassword.setFont(UIConstants.FONT_19);
 		jtextPassword.setBounds(196, 72, 130, 26);
 		getContentPane().add(jtextPassword);
@@ -115,7 +119,7 @@ public class AddWebMarketerDialog extends JDialog {
 
 	public StaffVO getInput() {
 		String addUsername = jtextUsername.getText();
-		String addPassword = jtextPassword.getText();
+		String addPassword = new String(jtextPassword.getPassword());
 		String addRealName = jtextRealName.getText();
 		StaffVO addWebMarketerVO = new StaffVO(addUsername, addPassword, addRealName, StaffType.WebsiteMarketer, null);
 		// System.out.println(addWebMarketerVO);

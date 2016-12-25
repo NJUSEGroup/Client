@@ -52,6 +52,9 @@ public class WebOrderPanel extends JPanel {
 		init();
 	}
 
+	/*
+	 * 初始化异常订单管理界面
+	 */
 	public void init() {
 		setSize(1080, 722);
 		setBackground(UIConstants.JFRAME);
@@ -125,6 +128,9 @@ public class WebOrderPanel extends JPanel {
 		add(jbSearchConfirm);
 	}
 
+	/**
+	 * 刷新异常订单管理界面
+	 */
 	public void refresh() {
 		orderList = getAbnormalOrder();
 		model = new WebOrderModel(orderList);
@@ -133,6 +139,11 @@ public class WebOrderPanel extends JPanel {
 		jlNumberOfPO.setFont(UIConstants.FONT_17);
 	}
 
+	/**
+	 * 获取所有异常订单
+	 * 
+	 * @return
+	 */
 	public List<OrderVO> getAbnormalOrder() {
 		try {
 			orderList = orderController.findOrderByOrderStatus(OrderStatus.Abnormal);
@@ -144,16 +155,25 @@ public class WebOrderPanel extends JPanel {
 		return orderList;
 	}
 
+	/*
+	 * 撤销异常订单，并恢复信用值的全部
+	 */
 	public void revokeFull(OrderVO vo) {
 		orderController.revokeOrder(vo, RestoreValueType.Full);
 		refresh();
 	}
 
+	/*
+	 * 撤销异常订单，并恢复信用值的一半
+	 */
 	public void revokeHalf(OrderVO vo) {
 		orderController.revokeOrder(vo, RestoreValueType.Half);
 		refresh();
 	}
 
+	/*
+	 * 搜索异常订单
+	 */
 	public void search() {
 		String input = textField.getText();
 		switch ((String) comboBox.getSelectedItem()) {
@@ -211,6 +231,9 @@ public class WebOrderPanel extends JPanel {
 		}
 	}
 
+	/*
+	 * 获取选择到的某个异常订单
+	 */
 	public OrderVO getSelected() {
 		if (jTable.getSelectedRow() != -1) {
 			return model.getValue(jTable.getSelectedRow());

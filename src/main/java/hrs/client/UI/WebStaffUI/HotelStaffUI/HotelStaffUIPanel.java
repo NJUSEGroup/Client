@@ -50,6 +50,9 @@ public class HotelStaffUIPanel extends JPanel {
 		init();
 	}
 
+	/**
+	 * 初始化酒店工作人员信息管理界面
+	 */
 	public void init() {
 		this.setSize(1080, 722);
 		this.setBackground(UIConstants.JFRAME);
@@ -109,11 +112,11 @@ public class HotelStaffUIPanel extends JPanel {
 		jlUsernameShow = new JLabel();
 		jlUsernameShow.setFont(UIConstants.FONT_19);
 		jlUsernameShow.setBounds(218, 126, 196, 29);
-		
+
 		jlPassWord = new JLabel("");
 		jlPassWord.setFont(UIConstants.FONT_21);
 		jlPassWord.setBounds(218, 192, 75, 29);
-		
+
 		setLayout(null);
 		add(jlSearchHotelStaff);
 		add(jcomboBoxType);
@@ -131,6 +134,9 @@ public class HotelStaffUIPanel extends JPanel {
 
 	}
 
+	/**
+	 * 搜索酒店工作人员信息
+	 */
 	public List<StaffVO> search() {
 		List<StaffVO> staffVOs = new ArrayList<>();
 		String findTypeText = getSearchInput();
@@ -162,6 +168,9 @@ public class HotelStaffUIPanel extends JPanel {
 		return staffVOs;
 	}
 
+	/**
+	 * 模糊搜索到多个时，可以选择某一个进行显示
+	 */
 	// list按顺序加到joptionpane里面
 	public void selectHotelAndShow() {
 		List<StaffVO> toAddStaffVOs = search();
@@ -208,6 +217,9 @@ public class HotelStaffUIPanel extends JPanel {
 		return jlUsernameShow.getText();
 	}
 
+	/**
+	 * 修改酒店工作人员信息
+	 */
 	public void modify() {
 		String newRealName = jtextRealName.getText();
 		selection.name = newRealName;
@@ -215,6 +227,9 @@ public class HotelStaffUIPanel extends JPanel {
 		controller.updateStaff(selection);
 	}// 酒店名称默认不可修改
 
+	/**
+	 * 清空界面上的输入框
+	 */
 	public void clear() {
 		jlUsernameShow.setText("");
 		jlPassWord.setText("");

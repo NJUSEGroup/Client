@@ -57,6 +57,9 @@ public class WebMarketFrame extends JFrame {
 		init();
 	}
 
+	/**
+	 * 初始化网站营销人员界面
+	 */
 	public void init() {
 		setTitle("酒店管理系统");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,7 +88,7 @@ public class WebMarketFrame extends JFrame {
 
 		jpWebOrder = new WebOrderPanel();
 		jpWebDiscount = new WebDiscountPanel();
-		jpUnexecutedOrder=new UnexecutedOrderPanel();
+		jpUnexecutedOrder = new UnexecutedOrderPanel();
 		jpCreditCharge = new CreditChargePanel();
 
 		jpCard.setLayout(cardLayout);
@@ -98,7 +101,7 @@ public class WebMarketFrame extends JFrame {
 		listener = new MenulistPanelMouseListener();
 		listener.setCard(cardLayout, jpCard);
 
-		jpMenulist = new MenulistPanel(jpWebOrder,this);
+		jpMenulist = new MenulistPanel(jpWebOrder, this);
 		jpMenulist.setBounds(5, 5, 263, 722);
 
 		contentPane.setLayout(gl_contentPane);

@@ -39,6 +39,9 @@ public class WebUserUIPanel extends JPanel {
 		// showUserinfo(showUserInfoPanel);
 	}
 
+	/*
+	 * 初始化用户信息管理界面
+	 */
 	public void init() {
 		this.setSize(1080, 722);
 		this.setBackground(UIConstants.JFRAME);
@@ -70,6 +73,11 @@ public class WebUserUIPanel extends JPanel {
 		add(jbModify);
 	}
 
+	/**
+	 * 利用用户名搜索网站营销人员
+	 * 
+	 * @return
+	 */
 	public UserVO searchUserByUsername() {
 		String username = jtextUsername.getText();
 		if (username.equals("")) {
@@ -89,6 +97,9 @@ public class WebUserUIPanel extends JPanel {
 
 	}
 
+	/**
+	 * 修改用户信息
+	 */
 	public void modify() {
 		userVO.name = showUserInfoPanel.getRealName();
 		userVO.birthDate = showUserInfoPanel.getBirthday();
@@ -100,6 +111,9 @@ public class WebUserUIPanel extends JPanel {
 		return jtextUsername.getText();
 	}
 
+	/**
+	 * 显示用户信息
+	 */
 	public void showUserinfo() {
 		if (searchUserByUsername() != null) {
 			showUserInfoPanel.inputInfo(searchUserByUsername());

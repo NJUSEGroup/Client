@@ -60,6 +60,9 @@ public class WebStaffFrame extends JFrame {
 		init();
 	}
 
+	/**
+	 * 初始化网站管理人员界面
+	 */
 	public void init() {
 		setTitle("酒店预订系统");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,10 +120,16 @@ public class WebStaffFrame extends JFrame {
 		contentPane.add(jpCard);
 	}
 
+	/**
+	 * 显示酒店工作人员添加界面
+	 */
 	public void showHotelStaffAddUIPanel() {
 		cardLayout.show(jpCard, "酒店工作人员添加");
 	}
 
+	/**
+	 * 显示酒店添加界面
+	 */
 	public void showHotelAddUIPanel() {
 		cardLayout.show(jpCard, "酒店添加");
 	}

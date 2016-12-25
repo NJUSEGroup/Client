@@ -28,7 +28,7 @@ public class MenulistPanel extends JPanel {
 	private JLabel jlAbnormal;
 	private JLabel jlCreditCharge;
 	private WebOrderPanel webOrderPanel;
-	private ImageIcon webDiscount, unexecutedOrder,abnormalOrder, creditCharge;
+	private ImageIcon webDiscount, unexecutedOrder, abnormalOrder, creditCharge;
 	private MenulistPanelMouseListener jpMenulistMouseListener;
 	private Color jlabel_color = UIConstants.JLABEL;
 	private Font jlabel_font = UIConstants.JLABEL_FONT;
@@ -40,6 +40,9 @@ public class MenulistPanel extends JPanel {
 		init();
 	}
 
+	/**
+	 * 初始化侧边栏
+	 */
 	public void init() {
 		setBounds(5, 5, 263, 722);
 		setLayout(null);
@@ -75,18 +78,18 @@ public class MenulistPanel extends JPanel {
 		jpMenulistMouseListener = new MenulistPanelMouseListener();
 		jlPromotion.addMouseListener(jpMenulistMouseListener);
 
-		unexecutedOrder=loader.getIcon("WebMarketUI/UnexecutedOrder.png");
+		unexecutedOrder = loader.getIcon("WebMarketUI/UnexecutedOrder.png");
 		unexecutedOrder.setImage(unexecutedOrder.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
-		
-		jlUnexecuted=new JLabel("未执行订单",JLabel.CENTER);
-		jlUnexecuted.setBounds(0,265,263,65);
+
+		jlUnexecuted = new JLabel("未执行订单", JLabel.CENTER);
+		jlUnexecuted.setBounds(0, 265, 263, 65);
 		jlUnexecuted.setIcon(unexecutedOrder);
 		jlUnexecuted.setFont(jlabel_font);
 		jlUnexecuted.setForeground(Color.WHITE);
 		jlUnexecuted.setOpaque(true);
 		jlUnexecuted.setBackground(jlabel_color);
 		jlUnexecuted.addMouseListener(jpMenulistMouseListener);
-		
+
 		abnormalOrder = loader.getIcon("WebMarketUI/AbnormalOrder.png");
 		abnormalOrder.setImage(abnormalOrder.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 
@@ -108,7 +111,7 @@ public class MenulistPanel extends JPanel {
 		creditCharge.setImage(creditCharge.getImage().getScaledInstance(35, 35, Image.SCALE_DEFAULT));
 
 		jlCreditCharge = new JLabel("信用充值", JLabel.CENTER);
-		jlCreditCharge.setBounds(0,395,263,65);
+		jlCreditCharge.setBounds(0, 395, 263, 65);
 		jlCreditCharge.setIcon(creditCharge);
 		jlCreditCharge.setFont(jlabel_font);
 		jlCreditCharge.setForeground(Color.WHITE);

@@ -36,7 +36,9 @@ public class MenulistPanel extends JPanel {
 		this.webStaffFrame = webStaffFrame;
 		init();
 	}
-
+/**
+ * 初始化侧边栏
+ */
 	public void init() {
 		ImageLoader loader = ImageLoader.getInstance();
 		listener = new WebStaffMenulistMouseListener();

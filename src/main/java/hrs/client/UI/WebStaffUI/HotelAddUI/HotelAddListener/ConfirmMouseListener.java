@@ -26,8 +26,6 @@ public class ConfirmMouseListener implements MouseListener {
 		} else {
 			if (hotelStaffAddUIPanel.passwordValid() == 1) {
 				hotelStaffAddUIPanel.addHotelStaff();
-				// JOptionPane.showMessageDialog(hotelStaffAddUIPanel,
-				// "添加酒店成功！");
 			} else {
 				JOptionPane.showMessageDialog(hotelStaffAddUIPanel, "两次密码不符，请重新输入！", "Error",
 						JOptionPane.ERROR_MESSAGE);

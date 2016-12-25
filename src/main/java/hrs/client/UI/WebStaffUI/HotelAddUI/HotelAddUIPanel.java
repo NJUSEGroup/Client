@@ -40,6 +40,9 @@ public class HotelAddUIPanel extends JPanel {
 
 	}
 
+	/**
+	 * 初始化酒店添加界面
+	 */
 	public void init() {
 		this.setSize(1080, 722);
 		this.setBackground(UIConstants.JFRAME);
@@ -142,6 +145,9 @@ public class HotelAddUIPanel extends JPanel {
 		return jtextHotelName.getText();
 	}
 
+	/**
+	 * 显示酒店工作人员添加界面
+	 */
 	public void showHotalStaffAddUIPanel() {
 		webStaffFrame.showHotelStaffAddUIPanel();
 	}

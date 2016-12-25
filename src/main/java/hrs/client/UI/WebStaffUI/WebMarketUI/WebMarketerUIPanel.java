@@ -48,8 +48,11 @@ public class WebMarketerUIPanel extends JPanel {
 		init();
 	}
 
+	/**
+	 * 初始化网站营销人员信息管理界面
+	 */
 	public void init() {
-		this.setSize(1080, 722);		
+		this.setSize(1080, 722);
 		this.setBackground(UIConstants.JFRAME);
 
 		jlWebMarketerSearch = new JLabel("搜索网站营销人员");
@@ -99,7 +102,7 @@ public class WebMarketerUIPanel extends JPanel {
 		jlUsernameShow = new JLabel();
 		jlUsernameShow.setBounds(298, 131, 215, 24);
 		jlUsernameShow.setFont(UIConstants.FONT_19);
-		
+
 		setLayout(null);
 		add(jlWebMarketerSearch);
 		add(jlWebMarketerUsername);
@@ -111,13 +114,16 @@ public class WebMarketerUIPanel extends JPanel {
 		add(jbSearchWebMarketerConfirm);
 		add(jbModifyWebMarketer);
 		add(jbAddWebMarketer);
-		
+
 		jlPassWord = new JLabel("");
 		jlPassWord.setFont(UIConstants.FONT_21);
 		jlPassWord.setBounds(298, 208, 96, 16);
 		add(jlPassWord);
 	}
 
+	/**
+	 * 搜索网站营销人员信息并显示
+	 */
 	public StaffVO searchAndShow() {
 		if (jtextWebMarketerUsername.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "请先输入网站营销人员用户名！", "Error", JOptionPane.ERROR_MESSAGE);
@@ -140,12 +146,18 @@ public class WebMarketerUIPanel extends JPanel {
 		return jlUsernameShow.getText();
 	}
 
+	/**
+	 * 修改网站营销人员信息
+	 */
 	public void modify() {
 		String newName = jtextWebMarketerRealName.getText();
 		webMarketerVO.name = newName;
 		controller.updateStaff(webMarketerVO);
 	}
 
+	/**
+	 * 添加网站营销人员
+	 */
 	public void add() {
 		StaffVO addStaffVO = addWebMarketerDialog.getInput();
 		if (!RegExpHelper.matchUsernameAndPWD(addStaffVO.username)
@@ -169,9 +181,12 @@ public class WebMarketerUIPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * 显示添加网站营销人员的对话框
+	 */
 	public void showDialog() {
 		// addWebMarketerDialog.show();
-		addWebMarketerDialog=new AddWebMarketerDialog(this);
+		addWebMarketerDialog = new AddWebMarketerDialog(this);
 		addWebMarketerDialog.setVisible(true);
 		addWebMarketerDialog.setLocationRelativeTo(null);
 	}
